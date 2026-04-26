@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#0d1117"/>
+
+  <!-- Gold border -->
+  <rect x="1" y="1" width="30" height="30" rx="5.5" fill="none" stroke="#c9a84c" stroke-width="1"/>
+
+  <!-- U -->
+  <text x="3" y="23" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#f0f2f5">U</text>
+
+  <!-- A (gold, italic) -->
+  <text x="12" y="23" font-family="Georgia, serif" font-size="13" font-style="italic" font-weight="400" fill="#c9a84c">A</text>
+
+  <!-- T -->
+  <text x="21" y="23" font-family="Georgia, serif" font-size="13" font-style="italic" font-weight="400" fill="#c9a84c">T</text>
+</svg>
