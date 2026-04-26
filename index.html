@@ -8,519 +8,578 @@
  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
  <style>
  :root {
- --bg: #0f0d0a;
- --surface: #16140f;
- --surface2: #1e1c15;
- --border: #2e2a1e;
- --text: #ede8dc;
- --muted: #6e6450;
- --accent: #c9922a;
- --accent2: #8aaa78;
- --rule: #2e2a1e;
+   --bg: #0f0d0a;
+   --surface: #16140f;
+   --surface2: #1e1c15;
+   --border: #2e2a1e;
+   --text: #ede8dc;
+   --muted: #6e6450;
+   --accent: #c9922a;
+   --accent2: #8aaa78;
+   --rule: #2e2a1e;
  }
 
  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
  html { scroll-behavior: smooth; }
 
  body {
- font-family: 'DM Sans', sans-serif;
- background: var(--bg);
- color: var(--text);
- min-height: 100vh;
- overflow-x: hidden;
+   font-family: 'DM Sans', sans-serif;
+   background: var(--bg);
+   color: var(--text);
+   min-height: 100vh;
+   overflow-x: hidden;
  }
 
  /* NOISE OVERLAY */
  body::before {
- content: '';
- position: fixed;
- inset: 0;
- background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
- pointer-events: none;
- z-index: 0;
- opacity: 0.4;
+   content: '';
+   position: fixed;
+   inset: 0;
+   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+   pointer-events: none;
+   z-index: 0;
+   opacity: 0.4;
  }
 
- /* NAV */
+ /* ── NAV ── */
  nav {
- position: fixed;
- top: 0; left: 0; right: 0;
- z-index: 100;
- display: flex;
- align-items: center;
- justify-content: space-between;
- padding: 16px 48px;
- background: rgba(15,15,13,0.85);
- backdrop-filter: blur(12px);
- border-bottom: 1px solid var(--border);
+   position: fixed;
+   top: 0; left: 0; right: 0;
+   z-index: 100;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 16px 48px;
+   background: rgba(15,13,10,0.92);
+   backdrop-filter: blur(12px);
+   border-bottom: 1px solid var(--border);
  }
  .nav-name {
- font-family: 'Cormorant Garamond', serif;
- font-size: 18px;
- font-weight: 600;
- letter-spacing: 0.02em;
- color: var(--text);
+   font-family: 'Cormorant Garamond', serif;
+   font-size: 18px;
+   font-weight: 600;
+   letter-spacing: 0.02em;
+   color: var(--text);
  }
  .nav-links {
- display: flex;
- gap: 32px;
- list-style: none;
+   display: flex;
+   gap: 32px;
+   list-style: none;
  }
  .nav-links a {
- font-family: 'DM Mono', monospace;
- font-size: 11px;
- letter-spacing: 0.12em;
- text-transform: uppercase;
- color: var(--muted);
- text-decoration: none;
- transition: color 0.2s;
+   font-family: 'DM Mono', monospace;
+   font-size: 11px;
+   letter-spacing: 0.12em;
+   text-transform: uppercase;
+   color: var(--muted);
+   text-decoration: none;
+   transition: color 0.2s;
  }
  .nav-links a:hover { color: var(--accent); }
 
- /* LINKEDIN-STYLE HERO */
+ /* Hamburger button — hidden on desktop */
+ .nav-hamburger {
+   display: none;
+   flex-direction: column;
+   justify-content: center;
+   gap: 5px;
+   background: none;
+   border: none;
+   cursor: pointer;
+   padding: 4px;
+   z-index: 110;
+ }
+ .nav-hamburger span {
+   display: block;
+   width: 22px;
+   height: 2px;
+   background: var(--text);
+   border-radius: 2px;
+   transition: transform 0.3s, opacity 0.3s;
+ }
+ /* Animate to X when open */
+ .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+ .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+ .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+ /* Mobile drawer */
+ .mobile-menu {
+   display: none;
+   position: fixed;
+   top: 0; left: 0; right: 0; bottom: 0;
+   background: rgba(15,13,10,0.98);
+   z-index: 105;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 36px;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 0.3s ease;
+ }
+ .mobile-menu.open {
+   opacity: 1;
+   pointer-events: all;
+ }
+ .mobile-menu a {
+   font-family: 'Cormorant Garamond', serif;
+   font-size: 36px;
+   font-weight: 600;
+   color: var(--text);
+   text-decoration: none;
+   letter-spacing: -0.01em;
+   transition: color 0.2s;
+ }
+ .mobile-menu a:hover { color: var(--accent); }
+
+ /* ── HERO ── */
  .hero {
- position: relative;
- z-index: 1;
- padding-top: 56px; /* nav height */
+   position: relative;
+   z-index: 1;
+   padding-top: 56px;
  }
-
- /* Banner image */
  .hero-banner {
- width: 100%;
- height: 220px;
- object-fit: cover;
- object-position: center 60%;
- border-bottom: 4px solid #9e9580;
- display: block;
+   width: 100%;
+   height: 220px;
+   object-fit: cover;
+   object-position: center 60%;
+   display: block;
  }
-
- /* Card below banner */
  .hero-card {
- max-width: 900px;
- margin: 0 auto;
- padding: 0 48px 48px;
- position: relative;
+   max-width: 900px;
+   margin: 0 auto;
+   padding: 0 48px 48px;
+   position: relative;
  }
-
- /* Circular headshot overlapping banner */
  .headshot-circle {
- width: 172px;
- height: 172px;
- border-radius: 50%;
- border: 4px solid #9e9580;
- overflow: hidden;
- position: relative;
- margin-top: -86px;
- margin-bottom: 16px;
- background: var(--surface2);
- flex-shrink: 0;
+   width: 172px;
+   height: 172px;
+   border-radius: 50%;
+   border: 4px solid var(--accent);
+   overflow: hidden;
+   position: relative;
+   margin-top: -86px;
+   margin-bottom: 16px;
+   background: var(--surface2);
+   flex-shrink: 0;
  }
  .headshot-circle img {
- width: 100%;
- height: 100%;
- object-fit: cover;
- object-position: top center;
- display: block;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: top center;
+   display: block;
  }
  .headshot-placeholder {
- display: none;
- width: 100%;
- height: 100%;
- align-items: center;
- justify-content: center;
- color: var(--muted);
+   display: none;
+   width: 100%;
+   height: 100%;
+   align-items: center;
+   justify-content: center;
+   color: var(--muted);
  }
  .headshot-placeholder svg { width: 48px; height: 48px; opacity: 0.3; }
 
  .hero-name {
- font-family: 'Cormorant Garamond', serif;
- font-size: clamp(28px, 4vw, 46px);
- font-weight: 700;
- line-height: 1.05;
- letter-spacing: -0.02em;
- color: var(--text);
- margin-bottom: 4px;
+   font-family: 'Cormorant Garamond', serif;
+   font-size: clamp(28px, 4vw, 46px);
+   font-weight: 700;
+   line-height: 1.05;
+   letter-spacing: -0.02em;
+   color: var(--text);
+   margin-bottom: 4px;
  }
  .hero-name em {
- font-style: italic;
- font-weight: 300;
- color: var(--accent);
+   font-style: italic;
+   font-weight: 300;
+   color: var(--accent);
  }
-
  .hero-title {
- font-size: 15px;
- color: #9e9580;
- margin-bottom: 6px;
- font-weight: 400;
+   font-size: 15px;
+   color: #9e9580;
+   margin-bottom: 6px;
+   font-weight: 400;
  }
-
  .hero-location {
- font-family: 'DM Mono', monospace;
- font-size: 11px;
- letter-spacing: 0.08em;
- color: var(--muted);
- margin-bottom: 20px;
+   font-family: 'DM Mono', monospace;
+   font-size: 11px;
+   letter-spacing: 0.08em;
+   color: var(--muted);
+   margin-bottom: 20px;
  }
-
  .hero-summary {
- font-size: 14.5px;
- line-height: 1.8;
- color: #7e7a6e;
- max-width: 620px;
- margin-bottom: 24px;
+   font-size: 14.5px;
+   line-height: 1.8;
+   color: #7e7a6e;
+   max-width: 620px;
+   margin-bottom: 24px;
  }
-
  .hero-contacts {
- display: flex;
- flex-wrap: wrap;
- gap: 10px;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
  }
  .contact-pill {
- display: flex;
- align-items: center;
- gap: 7px;
- background: var(--surface2);
- border: 1px solid var(--border);
- border-radius: 3px;
- padding: 7px 14px;
- font-family: 'DM Mono', monospace;
- font-size: 11px;
- color: var(--muted);
- text-decoration: none;
- transition: border-color 0.2s, color 0.2s;
+   display: flex;
+   align-items: center;
+   gap: 7px;
+   background: var(--surface2);
+   border: 1px solid var(--border);
+   border-radius: 3px;
+   padding: 7px 14px;
+   font-family: 'DM Mono', monospace;
+   font-size: 11px;
+   color: var(--muted);
+   text-decoration: none;
+   transition: border-color 0.2s, color 0.2s;
  }
  .contact-pill:hover { border-color: var(--accent); color: var(--accent); }
  .contact-pill svg { width: 13px; height: 13px; flex-shrink: 0; }
 
- /* SECTION WRAPPER */
+ /* ── SECTIONS ── */
  .container {
- max-width: 1100px;
- margin: 0 auto;
- padding: 0 48px;
- position: relative;
- z-index: 1;
+   max-width: 1100px;
+   margin: 0 auto;
+   padding: 0 48px;
+   position: relative;
+   z-index: 1;
  }
-
  section { padding: 80px 0; border-top: 1px solid var(--border); }
-
  .section-label {
- font-family: 'DM Mono', monospace;
- font-size: 10px;
- letter-spacing: 0.22em;
- text-transform: uppercase;
- color: var(--accent);
- margin-bottom: 14px;
- display: flex;
- align-items: center;
- gap: 12px;
+   font-family: 'DM Mono', monospace;
+   font-size: 10px;
+   letter-spacing: 0.22em;
+   text-transform: uppercase;
+   color: var(--accent);
+   margin-bottom: 14px;
+   display: flex;
+   align-items: center;
+   gap: 12px;
  }
  .section-label::after {
- content: '';
- flex: 1;
- max-width: 48px;
- height: 1px;
- background: var(--accent);
- opacity: 0.4;
+   content: '';
+   flex: 1;
+   max-width: 48px;
+   height: 1px;
+   background: var(--accent);
+   opacity: 0.4;
  }
  .section-title {
- font-family: 'Cormorant Garamond', serif;
- font-size: clamp(28px, 4vw, 44px);
- font-weight: 600;
- letter-spacing: -0.02em;
- line-height: 1.1;
- margin-bottom: 48px;
+   font-family: 'Cormorant Garamond', serif;
+   font-size: clamp(28px, 4vw, 44px);
+   font-weight: 600;
+   letter-spacing: -0.02em;
+   line-height: 1.1;
+   margin-bottom: 48px;
  }
 
- /* EXPERIENCE */
+ /* ── EXPERIENCE ── */
  .exp-list { display: flex; flex-direction: column; gap: 0; }
  .exp-item {
- display: grid;
- grid-template-columns: 200px 1fr;
- gap: 40px;
- padding: 36px 0;
- border-bottom: 1px solid var(--border);
+   display: grid;
+   grid-template-columns: 200px 1fr;
+   gap: 40px;
+   padding: 36px 0;
+   border-bottom: 1px solid var(--border);
  }
- .exp-item.visible { opacity: 1; transform: translateY(0); }
  .exp-item:last-child { border-bottom: none; }
-
- .exp-meta {}
  .exp-date {
- font-family: 'DM Mono', monospace;
- font-size: 11px;
- color: var(--muted);
- letter-spacing: 0.05em;
- margin-bottom: 8px;
+   font-family: 'DM Mono', monospace;
+   font-size: 11px;
+   color: var(--muted);
+   letter-spacing: 0.05em;
+   margin-bottom: 8px;
  }
  .exp-org {
- font-family: 'DM Mono', monospace;
- font-size: 11px;
- color: var(--accent2);
- letter-spacing: 0.04em;
- line-height: 1.4;
+   font-family: 'DM Mono', monospace;
+   font-size: 11px;
+   color: var(--accent2);
+   letter-spacing: 0.04em;
+   line-height: 1.4;
  }
  .exp-type {
- display: inline-block;
- margin-top: 8px;
- font-family: 'DM Mono', monospace;
- font-size: 9px;
- letter-spacing: 0.12em;
- text-transform: uppercase;
- color: var(--muted);
- background: var(--surface2);
- border: 1px solid var(--border);
- border-radius: 2px;
- padding: 2px 8px;
+   display: inline-block;
+   margin-top: 8px;
+   font-family: 'DM Mono', monospace;
+   font-size: 9px;
+   letter-spacing: 0.12em;
+   text-transform: uppercase;
+   color: var(--muted);
+   background: var(--surface2);
+   border: 1px solid var(--border);
+   border-radius: 2px;
+   padding: 2px 8px;
  }
-
- .exp-content {}
  .exp-role {
- font-family: 'Cormorant Garamond', serif;
- font-size: 22px;
- font-weight: 600;
- letter-spacing: -0.01em;
- margin-bottom: 14px;
- line-height: 1.2;
+   font-family: 'Cormorant Garamond', serif;
+   font-size: 22px;
+   font-weight: 600;
+   letter-spacing: -0.01em;
+   margin-bottom: 14px;
+   line-height: 1.2;
  }
  .exp-bullets {
- list-style: none;
- display: flex;
- flex-direction: column;
- gap: 9px;
+   list-style: none;
+   display: flex;
+   flex-direction: column;
+   gap: 9px;
  }
  .exp-bullets li {
- font-size: 14px;
- line-height: 1.7;
- color: #8e8a80;
- padding-left: 16px;
- position: relative;
+   font-size: 14px;
+   line-height: 1.7;
+   color: #8e8a80;
+   padding-left: 16px;
+   position: relative;
  }
  .exp-bullets li::before {
- content: '·';
- position: absolute;
- left: 0;
- color: var(--accent);
- font-size: 18px;
- line-height: 1.4;
+   content: '·';
+   position: absolute;
+   left: 0;
+   color: var(--accent);
+   font-size: 18px;
+   line-height: 1.4;
  }
  .exp-bullets li strong { color: var(--text); font-weight: 500; }
 
- /* SKILLS */
+ /* ── SKILLS ── */
  .skills-grid {
- display: grid;
- grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
- gap: 20px;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+   gap: 20px;
  }
  .skill-group {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 3px;
- padding: 22px;
+   background: var(--surface);
+   border: 1px solid var(--border);
+   border-radius: 3px;
+   padding: 22px;
  }
- .skill-group.visible { opacity: 1; transform: translateY(0); }
  .skill-group-title {
- font-family: 'DM Mono', monospace;
- font-size: 10px;
- letter-spacing: 0.15em;
- text-transform: uppercase;
- color: var(--accent);
- margin-bottom: 14px;
+   font-family: 'DM Mono', monospace;
+   font-size: 10px;
+   letter-spacing: 0.15em;
+   text-transform: uppercase;
+   color: var(--accent);
+   margin-bottom: 14px;
  }
  .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
  .skill-tag {
- font-family: 'DM Mono', monospace;
- font-size: 11px;
- color: var(--muted);
- background: var(--surface2);
- border: 1px solid var(--border);
- border-radius: 2px;
- padding: 4px 10px;
- transition: border-color 0.2s, color 0.2s;
+   font-family: 'DM Mono', monospace;
+   font-size: 11px;
+   color: var(--muted);
+   background: var(--surface2);
+   border: 1px solid var(--border);
+   border-radius: 2px;
+   padding: 4px 10px;
+   transition: border-color 0.2s, color 0.2s;
  }
  .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
 
- /* PROJECTS */
+ /* ── PROJECTS ── */
  .projects-grid {
- display: grid;
- grid-template-columns: 1fr 1fr;
- gap: 20px;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 20px;
  }
  .project-card {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 3px;
- padding: 28px;
- transition: border-color 0.2s;
+   background: var(--surface);
+   border: 1px solid var(--border);
+   border-radius: 3px;
+   padding: 28px;
+   transition: border-color 0.2s;
  }
- .project-card.visible { opacity: 1; transform: translateY(0); }
  .project-card:hover { border-color: var(--accent); }
  .project-tag {
- font-family: 'DM Mono', monospace;
- font-size: 10px;
- letter-spacing: 0.12em;
- text-transform: uppercase;
- color: var(--accent2);
- margin-bottom: 10px;
+   font-family: 'DM Mono', monospace;
+   font-size: 10px;
+   letter-spacing: 0.12em;
+   text-transform: uppercase;
+   color: var(--accent2);
+   margin-bottom: 10px;
  }
  .project-title {
- font-family: 'Cormorant Garamond', serif;
- font-size: 20px;
- font-weight: 600;
- margin-bottom: 10px;
- line-height: 1.25;
+   font-family: 'Cormorant Garamond', serif;
+   font-size: 20px;
+   font-weight: 600;
+   margin-bottom: 10px;
+   line-height: 1.25;
  }
  .project-desc {
- font-size: 13.5px;
- line-height: 1.7;
- color: #7a7668;
+   font-size: 13.5px;
+   line-height: 1.7;
+   color: #7a7668;
  }
 
- /* EDUCATION */
+ /* ── EDUCATION ── */
  .edu-grid {
- display: grid;
- grid-template-columns: 1fr 1fr;
- gap: 20px;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 20px;
  }
  .edu-card {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 3px;
- padding: 28px;
+   background: var(--surface);
+   border: 1px solid var(--border);
+   border-radius: 3px;
+   padding: 28px;
  }
  .edu-degree {
- font-family: 'Cormorant Garamond', serif;
- font-size: 18px;
- font-weight: 600;
- margin-bottom: 4px;
+   font-family: 'Cormorant Garamond', serif;
+   font-size: 18px;
+   font-weight: 600;
+   margin-bottom: 4px;
  }
  .edu-school {
- font-family: 'DM Mono', monospace;
- font-size: 11px;
- color: var(--accent2);
- letter-spacing: 0.05em;
- margin-bottom: 8px;
+   font-family: 'DM Mono', monospace;
+   font-size: 11px;
+   color: var(--accent2);
+   letter-spacing: 0.05em;
+   margin-bottom: 8px;
  }
  .edu-dates {
- font-family: 'DM Mono', monospace;
- font-size: 11px;
- color: var(--muted);
+   font-family: 'DM Mono', monospace;
+   font-size: 11px;
+   color: var(--muted);
  }
 
- /* CERTS */
- .cert-list {
- display: flex;
- flex-direction: column;
- gap: 12px;
- }
+ /* ── CERTS ── */
+ .cert-list { display: flex; flex-direction: column; gap: 12px; }
  .cert-item {
- display: flex;
- align-items: center;
- gap: 14px;
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 3px;
- padding: 16px 20px;
+   display: flex;
+   align-items: center;
+   gap: 14px;
+   background: var(--surface);
+   border: 1px solid var(--border);
+   border-radius: 3px;
+   padding: 16px 20px;
  }
  .cert-dot {
- width: 8px; height: 8px;
- border-radius: 50%;
- background: var(--accent);
- flex-shrink: 0;
+   width: 8px; height: 8px;
+   border-radius: 50%;
+   background: var(--accent);
+   flex-shrink: 0;
  }
- .cert-name {
- font-size: 14px;
- color: var(--text);
- font-weight: 500;
- }
+ .cert-name { font-size: 14px; color: var(--text); font-weight: 500; }
  .cert-year {
- margin-left: auto;
- font-family: 'DM Mono', monospace;
- font-size: 11px;
- color: var(--muted);
+   margin-left: auto;
+   font-family: 'DM Mono', monospace;
+   font-size: 11px;
+   color: var(--muted);
  }
 
- /* LEADERSHIP */
+ /* ── LEADERSHIP ── */
  .leadership-grid {
- display: grid;
- grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
- gap: 20px;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+   gap: 20px;
  }
  .leadership-card {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 3px;
- padding: 24px;
- transition: border-color 0.2s;
+   background: var(--surface);
+   border: 1px solid var(--border);
+   border-radius: 3px;
+   padding: 24px;
+   transition: border-color 0.2s;
  }
  .leadership-card:hover { border-color: var(--accent2); }
  .leadership-role {
- font-family: 'Cormorant Garamond', serif;
- font-size: 17px;
- font-weight: 600;
- margin-bottom: 4px;
+   font-family: 'Cormorant Garamond', serif;
+   font-size: 17px;
+   font-weight: 600;
+   margin-bottom: 4px;
  }
  .leadership-org {
- font-family: 'DM Mono', monospace;
- font-size: 10px;
- color: var(--accent2);
- letter-spacing: 0.08em;
- text-transform: uppercase;
- margin-bottom: 12px;
+   font-family: 'DM Mono', monospace;
+   font-size: 10px;
+   color: var(--accent2);
+   letter-spacing: 0.08em;
+   text-transform: uppercase;
+   margin-bottom: 12px;
  }
- .leadership-desc {
- font-size: 13px;
- line-height: 1.65;
- color: var(--muted);
- }
+ .leadership-desc { font-size: 13px; line-height: 1.65; color: var(--muted); }
 
- /* FOOTER */
+ /* ── FOOTER ── */
  footer {
- border-top: 1px solid var(--border);
- padding: 32px 48px;
- display: flex;
- align-items: center;
- justify-content: space-between;
- position: relative;
- z-index: 1;
+   border-top: 1px solid var(--border);
+   padding: 32px 48px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   position: relative;
+   z-index: 1;
  }
  .footer-name {
- font-family: 'Cormorant Garamond', serif;
- font-size: 16px;
- font-weight: 600;
- color: var(--muted);
+   font-family: 'Cormorant Garamond', serif;
+   font-size: 16px;
+   font-weight: 600;
+   color: var(--muted);
  }
  .footer-note {
- font-family: 'DM Mono', monospace;
- font-size: 10px;
- color: var(--muted);
- letter-spacing: 0.08em;
+   font-family: 'DM Mono', monospace;
+   font-size: 10px;
+   color: var(--muted);
+   letter-spacing: 0.08em;
  }
 
- /* ANIMATIONS */
+ /* ── SCROLL TO TOP ── */
+ .scroll-top {
+   display: none; /* shown via JS on mobile */
+   position: fixed;
+   bottom: 24px;
+   right: 24px;
+   z-index: 200;
+   width: 44px;
+   height: 44px;
+   border-radius: 50%;
+   background: var(--accent);
+   border: none;
+   cursor: pointer;
+   align-items: center;
+   justify-content: center;
+   box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 0.3s ease;
+ }
+ .scroll-top.visible {
+   opacity: 1;
+   pointer-events: all;
+ }
+ .scroll-top svg {
+   width: 18px;
+   height: 18px;
+   stroke: #0f0d0a;
+   fill: none;
+ }
+
+ /* ── ANIMATIONS ── */
  @keyframes fadeUp {
- from { opacity: 0; transform: translateY(24px); }
- to { opacity: 1; transform: translateY(0); }
+   from { opacity: 0; transform: translateY(24px); }
+   to   { opacity: 1; transform: translateY(0); }
  }
- .hero-banner { animation: fadeUp 0.6s ease both; }
+ .hero-banner    { animation: fadeUp 0.6s ease both; }
  .headshot-circle { animation: fadeUp 0.6s ease 0.2s both; }
- .hero-name { animation: fadeUp 0.6s ease 0.25s both; }
- .hero-title { animation: fadeUp 0.6s ease 0.3s both; }
- .hero-location { animation: fadeUp 0.6s ease 0.35s both; }
- .hero-summary { animation: fadeUp 0.6s ease 0.4s both; }
- .hero-contacts { animation: fadeUp 0.6s ease 0.45s both; }
+ .hero-name      { animation: fadeUp 0.6s ease 0.25s both; }
+ .hero-title     { animation: fadeUp 0.6s ease 0.3s both; }
+ .hero-location  { animation: fadeUp 0.6s ease 0.35s both; }
+ .hero-summary   { animation: fadeUp 0.6s ease 0.4s both; }
+ .hero-contacts  { animation: fadeUp 0.6s ease 0.45s both; }
 
- /* RESPONSIVE */
+ /* ── RESPONSIVE ── */
  @media (max-width: 900px) {
- nav { padding: 14px 24px; }
- .nav-links { display: none; }
- .hero-banner { height: 160px; }
- .hero-card { padding: 0 20px 40px; }
- .headshot-circle { width: 130px; height: 130px; margin-top: -65px; }
- .container { padding: 0 24px; }
- .exp-item { grid-template-columns: 1fr; gap: 10px; }
- .projects-grid,
- .edu-grid { grid-template-columns: 1fr; }
- footer { flex-direction: column; gap: 8px; text-align: center; }
+   nav { padding: 14px 20px; }
+   .nav-links { display: none; }
+   .nav-hamburger { display: flex; }
+   .mobile-menu { display: flex; }
+   .scroll-top { display: flex; }
+
+   .hero-banner { height: 160px; }
+   .hero-card { padding: 0 20px 40px; }
+   .headshot-circle { width: 130px; height: 130px; margin-top: -65px; }
+
+   .container { padding: 0 20px; }
+   .exp-item { grid-template-columns: 1fr; gap: 10px; }
+   .projects-grid,
+   .edu-grid { grid-template-columns: 1fr; }
+
+   footer { flex-direction: column; gap: 8px; text-align: center; padding: 24px 20px; }
  }
  </style>
 </head>
@@ -528,323 +587,352 @@
 
 <!-- NAV -->
 <nav>
- <span class="nav-name">Uriel Aguilar Torres</span>
- <ul class="nav-links">
- <li><a href="#experience">Experience</a></li>
- <li><a href="#projects">Projects</a></li>
- <li><a href="#skills">Skills</a></li>
- <li><a href="#education">Education</a></li>
- <li><a href="#leadership">Leadership</a></li>
- </ul>
+  <span class="nav-name">Uriel Aguilar Torres</span>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#experience" class="menu-link">Experience</a>
+  <a href="#projects"   class="menu-link">Projects</a>
+  <a href="#skills"     class="menu-link">Skills</a>
+  <a href="#education"  class="menu-link">Education</a>
+  <a href="#leadership" class="menu-link">Leadership</a>
+</div>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
 
 <!-- HERO -->
 <div class="hero" id="top">
- <!-- Banner -->
- <img class="hero-banner" src="banner.jpg" alt="Beef Northwest Feeders feedyard at sunset"/>
-
- <!-- Profile card -->
- <div class="hero-card">
- <!-- Circular headshot overlapping banner -->
- <div class="headshot-circle">
- <img src="headshot.jpg" alt="Uriel Aguilar Torres" id="headshot-img"/>
- <div class="headshot-placeholder" id="headshot-placeholder">
- <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
- <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
- </svg>
- </div>
- </div>
-
- <h1 class="hero-name">Uriel <em>Aguilar Torres</em></h1>
- <p class="hero-title">Systems Administrator (Part-Time) · Beef Northwest Feeders &nbsp;|&nbsp; BS Information Technology · Oregon Tech '27</p>
- <p class="hero-location"> Portland, OR Metro &nbsp;·&nbsp; Agricultural IT Specialist</p>
-
- <p class="hero-summary">
- I build, evaluate, and run enterprise IT infrastructure — from server environments and ITSM platforms to device management rollouts across multi-site agricultural operations. Currently completing my Data Infrastructure &amp; Networking emphasis degree while working part-time in a senior infrastructure role.
- </p>
-
- <div class="hero-contacts">
- <a href="mailto:urielagtor@gmail.com" class="contact-pill">
- <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
- urielagtor@gmail.com
- </a>
- <a href="https://linkedin.com/in/urielagtor" target="_blank" class="contact-pill">
- <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
- linkedin.com/in/urielagtor
- </a>
- </div>
- </div>
+  <img class="hero-banner" src="banner.jpg" alt="Beef Northwest Feeders feedyard at sunset"/>
+  <div class="hero-card">
+    <div class="headshot-circle">
+      <img src="headshot.jpg" alt="Uriel Aguilar Torres" id="headshot-img"/>
+      <div class="headshot-placeholder" id="headshot-placeholder">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+      </div>
+    </div>
+    <h1 class="hero-name">Uriel <em>Aguilar Torres</em></h1>
+    <p class="hero-title">Systems Administrator (Part-Time) · Beef Northwest Feeders &nbsp;|&nbsp; BS Information Technology · Oregon Tech '27</p>
+    <p class="hero-location">Portland, OR Metro &nbsp;·&nbsp; Agricultural IT Specialist</p>
+    <p class="hero-summary">
+      I build, evaluate, and run enterprise IT infrastructure — from server environments and ITSM platforms to device management rollouts across multi-site agricultural operations. Currently completing my Data Infrastructure &amp; Networking emphasis degree while working part-time in a senior infrastructure role.
+    </p>
+    <div class="hero-contacts">
+      <a href="mailto:urielagtor@gmail.com" class="contact-pill">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        urielagtor@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/urielagtor" target="_blank" class="contact-pill">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        linkedin.com/in/urielagtor
+      </a>
+    </div>
+  </div>
 </div>
 
 <!-- EXPERIENCE -->
 <section id="experience">
- <div class="container">
- <div class="section-label">Experience</div>
- <h2 class="section-title">Where I've worked</h2>
- <div class="exp-list">
+  <div class="container">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Where I've worked</h2>
+    <div class="exp-list">
 
- <div class="exp-item">
- <div class="exp-meta">
- <div class="exp-date">Apr 2026 – Present</div>
- <div class="exp-org">Beef Northwest Feeders<br>Boardman, OR</div>
- <span class="exp-type">Part-Time</span>
- </div>
- <div class="exp-content">
- <div class="exp-role">Systems Administrator</div>
- <ul class="exp-bullets">
- <li>Administer enterprise IT infrastructure across a <strong>multi-site agricultural and trucking operation</strong> — managing server environments, core business systems, and ITSM platforms to maintain 24/7 operational continuity.</li>
- <li>Leading the configuration and <strong>company-wide rollout of a device management and security platform</strong> — enabling zero-touch PC deployment, automated patch management, scripted remediation, and centralized compliance visibility across BNW and all subsidiary locations.</li>
- <li>Administer the organization's <strong>RMM and ITSM platforms</strong> — managing endpoint monitoring, patch policies, ticket workflows, SLA enforcement, asset records, and service catalog configuration across all sites.</li>
- <li>Enforce IT security policies across all administered systems: <strong>access control, credential management, patch compliance, and audit logging</strong> in alignment with organizational security standards.</li>
- </ul>
- </div>
- </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Apr 2026 – Present</div>
+          <div class="exp-org">Beef Northwest Feeders<br>Boardman, OR</div>
+          <span class="exp-type">Part-Time</span>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Systems Administrator</div>
+          <ul class="exp-bullets">
+            <li>Administer enterprise IT infrastructure across a <strong>multi-site agricultural and trucking operation</strong> — managing server environments, core business systems, and ITSM platforms to maintain 24/7 operational continuity.</li>
+            <li>Leading the configuration and <strong>company-wide rollout of a device management and security platform</strong> — enabling zero-touch PC deployment, automated patch management, scripted remediation, and centralized compliance visibility across BNW and all subsidiary locations.</li>
+            <li>Administer the organization's <strong>RMM and ITSM platforms</strong> — managing endpoint monitoring, patch policies, ticket workflows, SLA enforcement, asset records, and service catalog configuration across all sites.</li>
+            <li>Enforce IT security policies across all administered systems: <strong>access control, credential management, patch compliance, and audit logging</strong> in alignment with organizational security standards.</li>
+          </ul>
+        </div>
+      </div>
 
- <div class="exp-item">
- <div class="exp-meta">
- <div class="exp-date">Jun 2025 – Apr 2026</div>
- <div class="exp-org">Beef Northwest Feeders<br>North Powder, OR</div>
- <span class="exp-type">Internship</span>
- </div>
- <div class="exp-content">
- <div class="exp-role">IT Intern</div>
- <ul class="exp-bullets">
- <li>Led a <strong>solo enterprise ITSM platform evaluation</strong> — audited 8 platforms across 20+ capability criteria, conducted cost-benefit analysis across three finalist tools, and presented a formal recommendation to IT leadership.</li>
- <li>Implemented the selected platform end-to-end: <strong>self-service portal, AI chatbot, knowledge base, automated ticket routing, onboarding/offboarding workflows, and a live system status page</strong> — migrating the organization off a fully manual helpdesk workflow.</li>
- <li>Conducted a <strong>second platform evaluation for device management and security</strong> — audited 4 vendors across OS patching, zero-touch provisioning, automated software deployment, PowerShell/CMD scripting, compliance visibility, and vulnerability remediation. Produced a multi-year cost-benefit analysis and presented a formal recommendation to IT leadership.</li>
- <li><strong>Promoted to Systems Administrator within 10 months.</strong></li>
- </ul>
- </div>
- </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Jun 2025 – Apr 2026</div>
+          <div class="exp-org">Beef Northwest Feeders<br>North Powder, OR</div>
+          <span class="exp-type">Internship</span>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">IT Intern</div>
+          <ul class="exp-bullets">
+            <li>Led a <strong>solo enterprise ITSM platform evaluation</strong> — audited 8 platforms across 20+ capability criteria, conducted cost-benefit analysis across three finalist tools, and presented a formal recommendation to IT leadership.</li>
+            <li>Implemented the selected platform end-to-end: <strong>self-service portal, AI chatbot, knowledge base, automated ticket routing, onboarding/offboarding workflows, and a live system status page</strong> — migrating the organization off a fully manual helpdesk workflow.</li>
+            <li>Conducted a <strong>second platform evaluation for device management and security</strong> — audited 4 vendors across OS patching, zero-touch provisioning, automated software deployment, PowerShell/CMD scripting, compliance visibility, and vulnerability remediation. Produced a multi-year cost-benefit analysis and presented a formal recommendation to IT leadership.</li>
+            <li><strong>Promoted to Systems Administrator within 10 months.</strong></li>
+          </ul>
+        </div>
+      </div>
 
- <div class="exp-item">
- <div class="exp-meta">
- <div class="exp-date">Dec 2023 – Present</div>
- <div class="exp-org">Material Flow &amp; Conveyor Systems<br>Donald, OR</div>
- <span class="exp-type">Part-Time</span>
- </div>
- <div class="exp-content">
- <div class="exp-role">IT Specialist II</div>
- <ul class="exp-bullets">
- <li>Manage critical business systems — website, CRM, accounting software, on-site servers, and cloud hosting — maintaining <strong>99% uptime</strong> across all platforms.</li>
- <li>Administered a VoIP system overhaul resulting in a <strong>20% increase in communication efficiency</strong> and significantly reduced downtime.</li>
- <li>Drove <strong>$20,000+ in annual cost savings</strong> through comprehensive systems audit, redundancy elimination, and platform modernization.</li>
- <li>Manage the help desk achieving a <strong>95% first-contact resolution rate</strong> and a 30% reduction in reported technical issues across 50+ workstations.</li>
- </ul>
- </div>
- </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Dec 2023 – Present</div>
+          <div class="exp-org">Material Flow &amp; Conveyor Systems<br>Donald, OR</div>
+          <span class="exp-type">Part-Time</span>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">IT Specialist II</div>
+          <ul class="exp-bullets">
+            <li>Manage critical business systems — website, CRM, accounting software, on-site servers, and cloud hosting — maintaining <strong>99% uptime</strong> across all platforms.</li>
+            <li>Administered a VoIP system overhaul resulting in a <strong>20% increase in communication efficiency</strong> and significantly reduced downtime.</li>
+            <li>Drove <strong>$20,000+ in annual cost savings</strong> through comprehensive systems audit, redundancy elimination, and platform modernization.</li>
+            <li>Manage the help desk achieving a <strong>95% first-contact resolution rate</strong> and a 30% reduction in reported technical issues across 50+ workstations.</li>
+          </ul>
+        </div>
+      </div>
 
- <div class="exp-item">
- <div class="exp-meta">
- <div class="exp-date">Nov 2021 – Dec 2023</div>
- <div class="exp-org">Material Flow &amp; Conveyor Systems<br>Donald, OR</div>
- <span class="exp-type">Full-Time</span>
- </div>
- <div class="exp-content">
- <div class="exp-role">IT Specialist</div>
- <ul class="exp-bullets">
- <li>Sole IT resource managing 15 workstations and 3 on-site servers at <strong>99.9% uptime</strong> with no team support.</li>
- <li>Administered an e-commerce platform serving <strong>~200,000 annual users</strong>, integrating and maintaining 30+ software systems.</li>
- <li>Led a full website CMS redesign driving a <strong>20% increase in traffic</strong> and 15% lift in user engagement.</li>
- </ul>
- </div>
- </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Nov 2021 – Dec 2023</div>
+          <div class="exp-org">Material Flow &amp; Conveyor Systems<br>Donald, OR</div>
+          <span class="exp-type">Full-Time</span>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">IT Specialist</div>
+          <ul class="exp-bullets">
+            <li>Sole IT resource managing 15 workstations and 3 on-site servers at <strong>99.9% uptime</strong> with no team support.</li>
+            <li>Administered an e-commerce platform serving <strong>~200,000 annual users</strong>, integrating and maintaining 30+ software systems.</li>
+            <li>Led a full website CMS redesign driving a <strong>20% increase in traffic</strong> and 15% lift in user engagement.</li>
+          </ul>
+        </div>
+      </div>
 
- </div>
- </div>
+    </div>
+  </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
- <div class="container">
- <div class="section-label">Projects</div>
- <h2 class="section-title">Work I'm proud of</h2>
- <div class="projects-grid">
-
- <div class="project-card">
- <div class="project-tag"> Platform Evaluation · BNW</div>
- <div class="project-title">Helpdesk System Improvements</div>
- <div class="project-desc">Evaluated 8 ITSM platforms across 20+ criteria, recommended and implemented a full helpdesk solution — including self-service portal, AI chatbot, knowledge base, and automated ticket routing — replacing a fully manual process.</div>
- </div>
-
- <div class="project-card">
- <div class="project-tag"> Platform Evaluation · BNW</div>
- <div class="project-title">Device Management & Security Rollout</div>
- <div class="project-desc">Evaluated 4 device management and security platforms, produced a multi-year cost-benefit analysis across all enterprise endpoints, and presented a formal recommendation. Currently leading the company-wide implementation as Systems Administrator.</div>
- </div>
-
- <div class="project-card">
- <div class="project-tag"> Web · MFCS</div>
- <div class="project-title">E-Commerce Platform Administration</div>
- <div class="project-desc">Administered a platform serving ~200,000 annual users with 30+ integrated systems. Led a full CMS redesign that drove a 20% increase in traffic and 15% improvement in user engagement.</div>
- </div>
-
- <div class="project-card">
- <div class="project-tag"> Infrastructure · MFCS</div>
- <div class="project-title">VoIP System Overhaul</div>
- <div class="project-desc">Planned and executed a full VoIP system migration from scoping to post-implementation review — delivering a 20% increase in communication efficiency and meaningfully reducing system downtime.</div>
- </div>
-
- </div>
- </div>
+  <div class="container">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">Work I'm proud of</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-tag">Platform Evaluation · BNW</div>
+        <div class="project-title">Helpdesk System Improvements</div>
+        <div class="project-desc">Evaluated 8 ITSM platforms across 20+ criteria, recommended and implemented a full helpdesk solution — including self-service portal, AI chatbot, knowledge base, and automated ticket routing — replacing a fully manual process.</div>
+      </div>
+      <div class="project-card">
+        <div class="project-tag">Platform Evaluation · BNW</div>
+        <div class="project-title">Device Management &amp; Security Rollout</div>
+        <div class="project-desc">Evaluated 4 device management and security platforms, produced a multi-year cost-benefit analysis across all enterprise endpoints, and presented a formal recommendation. Currently leading the company-wide implementation as Systems Administrator.</div>
+      </div>
+      <div class="project-card">
+        <div class="project-tag">Web · MFCS</div>
+        <div class="project-title">E-Commerce Platform Administration</div>
+        <div class="project-desc">Administered a platform serving ~200,000 annual users with 30+ integrated systems. Led a full CMS redesign that drove a 20% increase in traffic and 15% improvement in user engagement.</div>
+      </div>
+      <div class="project-card">
+        <div class="project-tag">Infrastructure · MFCS</div>
+        <div class="project-title">VoIP System Overhaul</div>
+        <div class="project-desc">Planned and executed a full VoIP system migration from scoping to post-implementation review — delivering a 20% increase in communication efficiency and meaningfully reducing system downtime.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
- <div class="container">
- <div class="section-label">Skills</div>
- <h2 class="section-title">Technical toolkit</h2>
- <div class="skills-grid">
-
- <div class="skill-group">
- <div class="skill-group-title">Infrastructure</div>
- <div class="skill-tags">
- <span class="skill-tag">Server Administration</span>
- <span class="skill-tag">Virtualization</span>
- <span class="skill-tag">Disaster Recovery</span>
- <span class="skill-tag">Windows Server</span>
- <span class="skill-tag">DNS / DHCP</span>
- <span class="skill-tag">Network Fundamentals</span>
- </div>
- </div>
-
- <div class="skill-group">
- <div class="skill-group-title">Platforms & Tooling</div>
- <div class="skill-tags">
- <span class="skill-tag">ITSM Administration</span>
- <span class="skill-tag">RMM Administration</span>
- <span class="skill-tag">Endpoint Management</span>
- <span class="skill-tag">Google Workspace</span>
- <span class="skill-tag">VoIP Administration</span>
- <span class="skill-tag">CRM Administration</span>
- </div>
- </div>
-
- <div class="skill-group">
- <div class="skill-group-title">Automation & Security</div>
- <div class="skill-tags">
- <span class="skill-tag">PowerShell Scripting</span>
- <span class="skill-tag">Patch Management</span>
- <span class="skill-tag">Zero-Touch Deployment</span>
- <span class="skill-tag">IT Security & Compliance</span>
- <span class="skill-tag">Vulnerability Remediation</span>
- <span class="skill-tag">Access Control</span>
- </div>
- </div>
-
- <div class="skill-group">
- <div class="skill-group-title">Leadership & Strategy</div>
- <div class="skill-tags">
- <span class="skill-tag">IT Project Leadership</span>
- <span class="skill-tag">Vendor Evaluation</span>
- <span class="skill-tag">Cost-Benefit Analysis</span>
- <span class="skill-tag">Technical Documentation</span>
- <span class="skill-tag">Stakeholder Communication</span>
- <span class="skill-tag">Bilingual EN / ES</span>
- </div>
- </div>
-
- </div>
- </div>
+  <div class="container">
+    <div class="section-label">Skills</div>
+    <h2 class="section-title">Technical toolkit</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Server Administration</span>
+          <span class="skill-tag">Virtualization</span>
+          <span class="skill-tag">Disaster Recovery</span>
+          <span class="skill-tag">Windows Server</span>
+          <span class="skill-tag">DNS / DHCP</span>
+          <span class="skill-tag">Network Fundamentals</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Platforms &amp; Tooling</div>
+        <div class="skill-tags">
+          <span class="skill-tag">ITSM Administration</span>
+          <span class="skill-tag">RMM Administration</span>
+          <span class="skill-tag">Endpoint Management</span>
+          <span class="skill-tag">Google Workspace</span>
+          <span class="skill-tag">VoIP Administration</span>
+          <span class="skill-tag">CRM Administration</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Automation &amp; Security</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PowerShell Scripting</span>
+          <span class="skill-tag">Patch Management</span>
+          <span class="skill-tag">Zero-Touch Deployment</span>
+          <span class="skill-tag">IT Security &amp; Compliance</span>
+          <span class="skill-tag">Vulnerability Remediation</span>
+          <span class="skill-tag">Access Control</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Leadership &amp; Strategy</div>
+        <div class="skill-tags">
+          <span class="skill-tag">IT Project Leadership</span>
+          <span class="skill-tag">Vendor Evaluation</span>
+          <span class="skill-tag">Cost-Benefit Analysis</span>
+          <span class="skill-tag">Technical Documentation</span>
+          <span class="skill-tag">Stakeholder Communication</span>
+          <span class="skill-tag">Bilingual EN / ES</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- EDUCATION -->
 <section id="education">
- <div class="container">
- <div class="section-label">Education</div>
- <h2 class="section-title">Academic background</h2>
- <div class="edu-grid">
- <div class="edu-card">
- <div class="edu-degree">BS Information Technology</div>
- <div class="edu-school">Oregon Institute of Technology</div>
- <div class="edu-dates">Data Infrastructure &amp; Networking Emphasis &nbsp;·&nbsp; Sep 2023 – Jun 2027</div>
- </div>
- <div class="edu-card">
- <div class="edu-degree">Certifications</div>
- <div class="edu-school">Professional Credentials</div>
- <div class="cert-list" style="margin-top:12px;">
- <div class="cert-item">
- <div class="cert-dot"></div>
- <span class="cert-name">Red Hat System Administration I (RH124)</span>
- <span class="cert-year">2024</span>
- </div>
- <div class="cert-item">
- <div class="cert-dot"></div>
- <span class="cert-name">Freshservice Product Expert — Advanced</span>
- <span class="cert-year">2025</span>
- </div>
- <div class="cert-item">
- <div class="cert-dot"></div>
- <span class="cert-name">Marketing Principles Certificate</span>
- <span class="cert-year">2023</span>
- </div>
- <div class="cert-item">
- <div class="cert-dot"></div>
- <span class="cert-name">American FFA Degree</span>
- <span class="cert-year">2023</span>
- </div>
- </div>
- </div>
- </div>
- </div>
+  <div class="container">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Academic background</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">BS Information Technology</div>
+        <div class="edu-school">Oregon Institute of Technology</div>
+        <div class="edu-dates">Data Infrastructure &amp; Networking Emphasis &nbsp;·&nbsp; Sep 2023 – Jun 2027</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Certifications</div>
+        <div class="edu-school">Professional Credentials</div>
+        <div class="cert-list" style="margin-top:12px;">
+          <div class="cert-item">
+            <div class="cert-dot"></div>
+            <span class="cert-name">Red Hat System Administration I (RH124)</span>
+            <span class="cert-year">2024</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-dot"></div>
+            <span class="cert-name">Freshservice Product Expert — Advanced</span>
+            <span class="cert-year">2025</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-dot"></div>
+            <span class="cert-name">Marketing Principles Certificate</span>
+            <span class="cert-year">2023</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-dot"></div>
+            <span class="cert-name">American FFA Degree</span>
+            <span class="cert-year">2023</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- LEADERSHIP -->
 <section id="leadership">
- <div class="container">
- <div class="section-label">Leadership</div>
- <h2 class="section-title">Beyond the job title</h2>
- <div class="leadership-grid">
-
- <div class="leadership-card">
- <div class="leadership-role">Vice President, ASOIT</div>
- <div class="leadership-org">Oregon Institute of Technology · Jun 2025 – Present</div>
- <div class="leadership-desc">Support executive leadership of student government for a 4,000-student university — overseeing Cabinet projects and cross-departmental collaboration.</div>
- </div>
-
- <div class="leadership-card">
- <div class="leadership-role">President, ASOIT</div>
- <div class="leadership-org">Oregon Institute of Technology · Aug 2024 – Jun 2025</div>
- <div class="leadership-desc">Served as chief executive of student government — reporting to the Board of Trustees, meeting monthly with the University President, and sitting on six institutional committees including the Tuition Recommendation Committee and Resource Budget Commission.</div>
- </div>
-
- <div class="leadership-card">
- <div class="leadership-role">Board Member</div>
- <div class="leadership-org">Oregon FFA Foundation · Mar 2025 – Present</div>
- <div class="leadership-desc">Serve on the board of a 501(c)(3) that raised $1.24M in 2024, funding leadership development for 15,075 FFA members and 206 agriculture educators statewide.</div>
- </div>
-
- <div class="leadership-card">
- <div class="leadership-role">State Sentinel</div>
- <div class="leadership-org">Oregon FFA · Mar 2022 – Mar 2023</div>
- <div class="leadership-desc">Elected state officer representing 15,000+ Oregon FFA members. Delivered keynote to 3,000+ attendees at the 95th Oregon FFA State Convention. Facilitated workshops across ~50 classrooms and 11 District Leadership Camps statewide.</div>
- </div>
-
- <div class="leadership-card">
- <div class="leadership-role">Workshop Facilitator</div>
- <div class="leadership-org">National FFA Organization · Oct – Nov 2023</div>
- <div class="leadership-desc">Facilitated 9 workshops at the National FFA Convention in Indianapolis — including the organization's first-ever Spanish-language workshops — reaching thousands of students over three days.</div>
- </div>
-
- </div>
- </div>
+  <div class="container">
+    <div class="section-label">Leadership</div>
+    <h2 class="section-title">Beyond the job title</h2>
+    <div class="leadership-grid">
+      <div class="leadership-card">
+        <div class="leadership-role">Vice President, ASOIT</div>
+        <div class="leadership-org">Oregon Institute of Technology · Jun 2025 – Present</div>
+        <div class="leadership-desc">Support executive leadership of student government for a 4,000-student university — overseeing Cabinet projects and cross-departmental collaboration.</div>
+      </div>
+      <div class="leadership-card">
+        <div class="leadership-role">President, ASOIT</div>
+        <div class="leadership-org">Oregon Institute of Technology · Aug 2024 – Jun 2025</div>
+        <div class="leadership-desc">Served as chief executive of student government — reporting to the Board of Trustees, meeting monthly with the University President, and sitting on six institutional committees including the Tuition Recommendation Committee and Resource Budget Commission.</div>
+      </div>
+      <div class="leadership-card">
+        <div class="leadership-role">Board Member</div>
+        <div class="leadership-org">Oregon FFA Foundation · Mar 2025 – Present</div>
+        <div class="leadership-desc">Serve on the board of a 501(c)(3) that raised $1.24M in 2024, funding leadership development for 15,075 FFA members and 206 agriculture educators statewide.</div>
+      </div>
+      <div class="leadership-card">
+        <div class="leadership-role">State Sentinel</div>
+        <div class="leadership-org">Oregon FFA · Mar 2022 – Mar 2023</div>
+        <div class="leadership-desc">Elected state officer representing 15,000+ Oregon FFA members. Delivered keynote to 3,000+ attendees at the 95th Oregon FFA State Convention. Facilitated workshops across ~50 classrooms and 11 District Leadership Camps statewide.</div>
+      </div>
+      <div class="leadership-card">
+        <div class="leadership-role">Workshop Facilitator</div>
+        <div class="leadership-org">National FFA Organization · Oct – Nov 2023</div>
+        <div class="leadership-desc">Facilitated 9 workshops at the National FFA Convention in Indianapolis — including the organization's first-ever Spanish-language workshops — reaching thousands of students over three days.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
- <span class="footer-name">Uriel Aguilar Torres</span>
- <span class="footer-note">urielagtor@gmail.com &nbsp;·&nbsp; Portland, OR &nbsp;·&nbsp; Oregon Tech '27</span>
+  <span class="footer-name">Uriel Aguilar Torres</span>
+  <span class="footer-note">urielagtor@gmail.com &nbsp;·&nbsp; Portland, OR &nbsp;·&nbsp; Oregon Tech '27</span>
 </footer>
 
 <script>
- // Show placeholder if headshot.jpg not found
- const img = document.getElementById('headshot-img');
- const placeholder = document.getElementById('headshot-placeholder');
- img.addEventListener('error', () => {
- img.style.display = 'none';
- placeholder.style.display = 'flex';
- });
+  // Headshot fallback
+  const img = document.getElementById('headshot-img');
+  const placeholder = document.getElementById('headshot-placeholder');
+  img.addEventListener('error', () => {
+    img.style.display = 'none';
+    placeholder.style.display = 'flex';
+  });
 
+  // ── MOBILE MENU ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close menu when a link is tapped
+  document.querySelectorAll('.menu-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ── SCROLL TO TOP ──
+  const scrollBtn = document.getElementById('scroll-top');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 
 </body>
