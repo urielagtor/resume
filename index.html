@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -18,339 +19,357 @@
       --accent2: #b0975a;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+```
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 48px 24px;
-      overflow-x: hidden;
-    }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px;
+  overflow-x: hidden;
+}
 
-    /* Radial glow */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 60% at 50% 30%, rgba(201,168,76,0.07) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
+/* Radial glow */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 30%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
 
-    /* Noise */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.35;
-    }
+/* Noise */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
 
-    /* ── DESKTOP LAYOUT WRAPPER ── */
-    .page {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 900px;
-      display: grid;
-      grid-template-columns: 340px 1fr;
-      gap: 28px;
-      align-items: start;
-    }
+/* ── DESKTOP LAYOUT WRAPPER ── */
+.page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 960px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
 
-    /* ── CARD (left column on desktop, full width on mobile) ── */
-    .card {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-    }
+/* ── CARD (left column on desktop, full width on mobile) ── */
+.card {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
 
-    .card-banner {
-      width: 100%;
-      height: 130px;
-      object-fit: cover;
-      object-position: center 60%;
-      display: block;
-      filter: brightness(0.65) saturate(0.6);
-    }
+.card-banner {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  object-position: center 60%;
+  display: block;
+  filter: brightness(0.65) saturate(0.6);
+}
 
-    .banner-rule {
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 60%, transparent 100%);
-    }
+.banner-rule {
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 60%, transparent 100%);
+}
 
-    .card-identity {
-      padding: 0 28px 24px;
-    }
+.card-identity {
+  padding: 0 28px 24px;
+}
 
-    .headshot-wrap {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      border: 3px solid var(--accent);
-      overflow: hidden;
-      margin-top: -48px;
-      margin-bottom: 14px;
-      background: var(--surface2);
-      flex-shrink: 0;
-    }
-    .headshot-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-    }
+.headshot-wrap {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  overflow: hidden;
+  margin-top: -48px;
+  margin-bottom: 14px;
+  background: var(--surface2);
+  flex-shrink: 0;
+}
+.headshot-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
 
-    .card-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 5px;
-    }
-    .card-name em {
-      font-style: italic;
-      font-weight: 300;
-      color: var(--accent);
-    }
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 5px;
+}
+.card-name em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent);
+}
 
-    .card-title {
-      font-size: 12.5px;
-      color: var(--accent2);
-      font-weight: 400;
-      margin-bottom: 3px;
-      line-height: 1.5;
-    }
+.card-title {
+  font-size: 12.5px;
+  color: var(--accent2);
+  font-weight: 400;
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
 
-    .card-location {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
+.card-location {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
 
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 0 28px 20px;
-    }
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 28px 20px;
+}
 
-    .card-links {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 0 28px 20px;
-    }
+.card-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 28px 20px;
+}
 
-    .card-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 13px 16px;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 400;
-      transition: border-color 0.2s, background 0.2s;
-      cursor: pointer;
-    }
-    .card-link:hover {
-      border-color: var(--accent);
-      background: var(--accent-dim);
-    }
+.card-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 13px 16px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 400;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.card-link:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
 
-    .link-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.2s;
-    }
-    .card-link:hover .link-icon {
-      background: rgba(201,168,76,0.2);
-    }
-    .link-icon svg {
-      width: 15px;
-      height: 15px;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
+.link-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.card-link:hover .link-icon {
+  background: rgba(201,168,76,0.2);
+}
+.link-icon svg {
+  width: 15px;
+  height: 15px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
 
-    .link-text {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-    .link-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .link-value {
-      font-size: 12px;
-      color: var(--text);
-    }
+.link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.link-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.link-value {
+  font-size: 12px;
+  color: var(--text);
+}
 
-    .link-arrow {
-      margin-left: auto;
-      color: var(--muted);
-      flex-shrink: 0;
-      transition: color 0.2s, transform 0.2s;
-    }
-    .card-link:hover .link-arrow {
-      color: var(--accent);
-      transform: translateX(2px);
-    }
+.link-arrow {
+  margin-left: auto;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color 0.2s, transform 0.2s;
+}
+.card-link:hover .link-arrow {
+  color: var(--accent);
+  transform: translateX(2px);
+}
 
-    .btn-portfolio {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: calc(100% - 56px);
-      margin: 0 28px 28px;
-      padding: 13px;
-      background: var(--accent);
-      border: none;
-      border-radius: 4px;
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #0d1117;
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
-      transition: opacity 0.2s, transform 0.15s;
-    }
-    .btn-portfolio:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-portfolio svg { width: 14px; height: 14px; }
+.btn-portfolio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: calc(100% - 56px);
+  margin: 0 28px 28px;
+  padding: 13px;
+  background: var(--accent);
+  border: none;
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0d1117;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-portfolio:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-portfolio svg { width: 14px; height: 14px; }
 
-    /* ── RIGHT PANEL (desktop only) ── */
-    .side-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+/* ── RIGHT PANEL (desktop only) ── */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-    .panel-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 24px 28px;
-    }
+.panel-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px 28px;
+}
 
-    .panel-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .panel-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.3;
-    }
+.panel-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.panel-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.3;
+}
 
-    .panel-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 10px;
-      line-height: 1.2;
-    }
+.panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
 
-    .panel-body {
-      font-size: 13px;
-      line-height: 1.8;
-      color: #8e96a8;
-    }
+.panel-body {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #8e96a8;
+}
 
-    /* Quick-facts list */
-    .fact-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .fact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 13px;
-      color: #8e96a8;
-      line-height: 1.5;
-    }
-    .fact-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-      margin-top: 6px;
-    }
-    .fact-item strong {
-      color: var(--text);
-      font-weight: 500;
-    }
+/* Quick-facts list */
+.fact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #8e96a8;
+  line-height: 1.5;
+}
+.fact-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+.fact-item strong {
+  color: var(--text);
+  font-weight: 500;
+}
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-    .card          { animation: fadeUp 0.5s ease both; }
-    .headshot-wrap { animation: fadeUp 0.5s ease 0.15s both; }
-    .card-name     { animation: fadeUp 0.5s ease 0.2s both; }
-    .card-title    { animation: fadeUp 0.5s ease 0.25s both; }
-    .card-location { animation: fadeUp 0.5s ease 0.28s both; }
-    .divider       { animation: fadeUp 0.5s ease 0.3s both; }
-    .card-links    { animation: fadeUp 0.5s ease 0.35s both; }
-    .btn-portfolio { animation: fadeUp 0.5s ease 0.4s both; }
-    .side-panel    { animation: fadeUp 0.5s ease 0.25s both; }
+.card          { animation: fadeUp 0.5s ease both; }
+.headshot-wrap { animation: fadeUp 0.5s ease 0.15s both; }
+.card-name     { animation: fadeUp 0.5s ease 0.2s both; }
+.card-title    { animation: fadeUp 0.5s ease 0.25s both; }
+.card-location { animation: fadeUp 0.5s ease 0.28s both; }
+.divider       { animation: fadeUp 0.5s ease 0.3s both; }
+.card-links    { animation: fadeUp 0.5s ease 0.35s both; }
+.btn-portfolio { animation: fadeUp 0.5s ease 0.4s both; }
+.side-panel    { animation: fadeUp 0.5s ease 0.25s both; }
 
-    /* ── RESPONSIVE: collapse to single column on mobile ── */
-    @media (max-width: 700px) {
-      body { padding: 24px 16px; align-items: flex-start; }
+/* ── TABLET: balanced two columns, tighter spacing ── */
+@media (max-width: 860px) and (min-width: 601px) {
+  body { padding: 32px 20px; }
 
-      .page {
-        grid-template-columns: 1fr;
-        max-width: 420px;
-        gap: 16px;
-      }
+  .page { gap: 20px; }
 
-      .side-panel { display: none; }
-    }
+  .card-name { font-size: 22px; }
+  .card-banner { height: 110px; }
+  .headshot-wrap { width: 82px; height: 82px; margin-top: -41px; }
+
+  .panel-block { padding: 20px 22px; }
+  .panel-title { font-size: 17px; }
+  .panel-body, .fact-item { font-size: 12px; }
+}
+
+/* ── MOBILE: single column, card only ── */
+@media (max-width: 600px) {
+  body { padding: 24px 16px; align-items: flex-start; }
+
+  .page {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    gap: 16px;
+  }
+
+  .side-panel { display: none; }
+}
+```
+
   </style>
 </head>
 <body>
@@ -358,117 +377,123 @@
 <div class="page">
 
   <!-- ── LEFT: CARD ── -->
+
   <div class="card">
 
-    <img class="card-banner" src="banner.jpg" alt=""/>
-    <div class="banner-rule"></div>
+```
+<img class="card-banner" src="banner.jpg" alt=""/>
+<div class="banner-rule"></div>
 
-    <div class="card-identity">
-      <div class="headshot-wrap">
-        <img src="headshot.jpg" alt="Uriel Aguilar Torres"/>
-      </div>
-      <h1 class="card-name">Uriel <em>Aguilar Torres</em></h1>
-      <p class="card-title">IT Systems Administrator · Beef Northwest Feeders</p>
-      <p class="card-location">Portland, OR Metro &nbsp;·&nbsp; Oregon Tech '27</p>
-    </div>
+<div class="card-identity">
+  <div class="headshot-wrap">
+    <img src="headshot.jpg" alt="Uriel Aguilar Torres"/>
+  </div>
+  <h1 class="card-name">Uriel <em>Aguilar Torres</em></h1>
+  <p class="card-title">IT Systems Administrator · Beef Northwest Feeders</p>
+  <p class="card-location">Portland, OR Metro &nbsp;·&nbsp; Oregon Tech '27</p>
+</div>
 
-    <div class="divider"></div>
+<div class="divider"></div>
 
-    <div class="card-links">
+<div class="card-links">
 
-      <a href="mailto:resume@urielaguilartorres.com" class="card-link">
-        <span class="link-icon">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-          </svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Email</span>
-          <span class="link-value">resume@urielaguilartorres.com</span>
-        </span>
-        <svg class="link-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </a>
-
-      <a href="https://linkedin.com/in/urielagtor" target="_blank" class="card-link">
-        <span class="link-icon">
-          <svg fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">LinkedIn</span>
-          <span class="link-value">linkedin.com/in/urielagtor</span>
-        </span>
-        <svg class="link-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </a>
-
-    </div>
-
-    <a href="/portfolio.html" class="btn-portfolio">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+  <a href="mailto:resume@urielaguilartorres.com" class="card-link">
+    <span class="link-icon">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
       </svg>
-      View Portfolio
-    </a>
+    </span>
+    <span class="link-text">
+      <span class="link-label">Email</span>
+      <span class="link-value">resume@urielaguilartorres.com</span>
+    </span>
+    <svg class="link-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  </a>
+
+  <a href="https://linkedin.com/in/urielagtor" target="_blank" class="card-link">
+    <span class="link-icon">
+      <svg fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+    </span>
+    <span class="link-text">
+      <span class="link-label">LinkedIn</span>
+      <span class="link-value">linkedin.com/in/urielagtor</span>
+    </span>
+    <svg class="link-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  </a>
+
+</div>
+
+<a href="/portfolio.html" class="btn-portfolio">
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+  </svg>
+  View Portfolio
+</a>
+```
 
   </div>
 
   <!-- ── RIGHT: SIDE PANEL (desktop only) ── -->
+
   <div class="side-panel">
 
-    <div class="panel-block">
-      <div class="panel-label">About</div>
-      <div class="panel-title">IT Systems Administrator</div>
-      <p class="panel-body">I build, evaluate, and run enterprise IT infrastructure — from server environments and ITSM platforms to device management rollouts across multi-site agricultural operations. Currently completing my BS in Information Technology at Oregon Tech while working in a senior infrastructure role.</p>
-    </div>
+```
+<div class="panel-block">
+  <div class="panel-label">About</div>
+  <div class="panel-title">IT Systems Administrator</div>
+  <p class="panel-body">I build, evaluate, and run enterprise IT infrastructure — from server environments and ITSM platforms to device management rollouts across multi-site agricultural operations. Currently completing my BS in Information Technology at Oregon Tech while working in a senior infrastructure role.</p>
+</div>
 
-    <div class="panel-block">
-      <div class="panel-label">Quick Facts</div>
-      <div class="fact-list">
-        <div class="fact-item">
-          <div class="fact-dot"></div>
-          <span><strong>Role</strong> — IT Systems Administrator, Beef Northwest Feeders</span>
-        </div>
-        <div class="fact-item">
-          <div class="fact-dot"></div>
-          <span><strong>Degree</strong> — BS Information Technology, Oregon Tech '27</span>
-        </div>
-        <div class="fact-item">
-          <div class="fact-dot"></div>
-          <span><strong>Focus</strong> — Infrastructure, ITSM, endpoint management &amp; security</span>
-        </div>
-        <div class="fact-item">
-          <div class="fact-dot"></div>
-          <span><strong>Location</strong> — Portland, OR Metro</span>
-        </div>
-        <div class="fact-item">
-          <div class="fact-dot"></div>
-          <span><strong>Languages</strong> — English &amp; Spanish (bilingual)</span>
-        </div>
-      </div>
+<div class="panel-block">
+  <div class="panel-label">Quick Facts</div>
+  <div class="fact-list">
+    <div class="fact-item">
+      <div class="fact-dot"></div>
+      <span><strong>Role</strong> — IT Systems Administrator, Beef Northwest Feeders</span>
     </div>
+    <div class="fact-item">
+      <div class="fact-dot"></div>
+      <span><strong>Degree</strong> — BS Information Technology, Oregon Tech '27</span>
+    </div>
+    <div class="fact-item">
+      <div class="fact-dot"></div>
+      <span><strong>Focus</strong> — Infrastructure, ITSM, endpoint management &amp; security</span>
+    </div>
+    <div class="fact-item">
+      <div class="fact-dot"></div>
+      <span><strong>Location</strong> — Portland, OR Metro</span>
+    </div>
+    <div class="fact-item">
+      <div class="fact-dot"></div>
+      <span><strong>Languages</strong> — English &amp; Spanish (bilingual)</span>
+    </div>
+  </div>
+</div>
 
-    <div class="panel-block">
-      <div class="panel-label">Leadership</div>
-      <div class="fact-list">
-        <div class="fact-item">
-          <div class="fact-dot"></div>
-          <span><strong>VP, ASOIT</strong> — Student government, Oregon Tech</span>
-        </div>
-        <div class="fact-item">
-          <div class="fact-dot"></div>
-          <span><strong>Board Member</strong> — Oregon FFA Foundation ($1.24M raised in 2024)</span>
-        </div>
-        <div class="fact-item">
-          <div class="fact-dot"></div>
-          <span><strong>State Sentinel</strong> — Oregon FFA, represented 15,000+ members</span>
-        </div>
-      </div>
+<div class="panel-block">
+  <div class="panel-label">Leadership</div>
+  <div class="fact-list">
+    <div class="fact-item">
+      <div class="fact-dot"></div>
+      <span><strong>VP, ASOIT</strong> — Student government, Oregon Tech</span>
     </div>
+    <div class="fact-item">
+      <div class="fact-dot"></div>
+      <span><strong>Board Member</strong> — Oregon FFA Foundation ($1.24M raised in 2024)</span>
+    </div>
+    <div class="fact-item">
+      <div class="fact-dot"></div>
+      <span><strong>State Sentinel</strong> — Oregon FFA, represented 15,000+ members</span>
+    </div>
+  </div>
+</div>
+```
 
   </div>
 
