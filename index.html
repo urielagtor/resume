@@ -281,9 +281,6 @@
             gap: 40px !important;
             padding: 36px 0 !important;
             border-bottom: 1px solid var(--border) !important;
-            opacity: 0 !important;
-            transform: translateY(20px) !important;
-            transition: opacity 0.5s ease, transform 0.5s ease !important;
         }
 
             .exp-item.visible {
@@ -381,14 +378,11 @@
             border: 1px solid var(--border) !important;
             border-radius: 3px !important;
             padding: 22px !important;
-            opacity: 0 !important;
-            transform: translateY(16px) !important;
-            transition: opacity 0.4s ease, transform 0.4s ease !important;
         }
 
             .skill-group.visible {
-                opacity: 1;
-                transform: translateY(0);
+                opacity: 1 !important;
+                transform: translateY(0) !important;
             }
 
         .skill-group-title {
@@ -434,15 +428,12 @@
             border: 1px solid var(--border) !important;
             border-radius: 3px !important;
             padding: 28px !important;
-            transition: border-color 0.2s, transform 0.2s !important;
-            opacity: 0 !important;
-            transform: translateY(16px) !important;
-            transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s !important;
+            transition: border-color 0.2s !important;
         }
 
             .project-card.visible {
-                opacity: 1;
-                transform: translateY(0);
+                opacity: 1 !important;
+                transform: translateY(0) !important;
             }
 
             .project-card:hover {
@@ -1027,22 +1018,6 @@
             placeholder.style.display = 'flex';
         });
 
-        // Intersection observer for scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, entry.target.dataset.delay || 0);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.exp-item, .skill-group, .project-card').forEach((el, i) => {
-            el.dataset.delay = (i % 4) * 80;
-            observer.observe(el);
-        });
     </script>
 
 </body>
