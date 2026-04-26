@@ -8,15 +8,15 @@
  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
  <style>
  :root {
-   --bg: #0f0d0a;
-   --surface: #16140f;
-   --surface2: #1e1c15;
-   --border: #2e2a1e;
-   --text: #ede8dc;
-   --muted: #6e6450;
-   --accent: #c9922a;
-   --accent2: #8aaa78;
-   --rule: #2e2a1e;
+   --bg: #0b1120;
+   --surface: #111929;
+   --surface2: #172035;
+   --border: #1e2d4a;
+   --text: #eef2fb;
+   --muted: #5a7099;
+   --accent: #c9a84c;       /* gold */
+   --accent2: #6ea8d8;      /* steel blue */
+   --rule: #1e2d4a;
  }
 
  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,7 +50,7 @@
    align-items: center;
    justify-content: space-between;
    padding: 16px 48px;
-   background: rgba(15,13,10,0.92);
+   background: rgba(11,17,32,0.94);
    backdrop-filter: blur(12px);
    border-bottom: 1px solid var(--border);
  }
@@ -77,7 +77,6 @@
  }
  .nav-links a:hover { color: var(--accent); }
 
- /* Hamburger button — hidden on desktop */
  .nav-hamburger {
    display: none;
    flex-direction: column;
@@ -97,17 +96,15 @@
    border-radius: 2px;
    transition: transform 0.3s, opacity 0.3s;
  }
- /* Animate to X when open */
  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
- /* Mobile drawer */
  .mobile-menu {
    display: none;
    position: fixed;
    top: 0; left: 0; right: 0; bottom: 0;
-   background: rgba(15,13,10,0.98);
+   background: rgba(11,17,32,0.98);
    z-index: 105;
    flex-direction: column;
    align-items: center;
@@ -143,8 +140,9 @@
    height: 220px;
    object-fit: cover;
    object-position: center 60%;
-   border-bottom: 4px solid #9e9580;
+   border-bottom: 4px solid var(--accent);
    display: block;
+   filter: brightness(0.75) saturate(0.7);
  }
  .hero-card {
    max-width: 900px;
@@ -156,7 +154,7 @@
    width: 172px;
    height: 172px;
    border-radius: 50%;
-   border: 4px solid #9e9580;
+   border: 4px solid var(--accent);
    overflow: hidden;
    position: relative;
    margin-top: -86px;
@@ -197,7 +195,7 @@
  }
  .hero-title {
    font-size: 15px;
-   color: #9e9580;
+   color: var(--accent2);
    margin-bottom: 6px;
    font-weight: 400;
  }
@@ -211,7 +209,7 @@
  .hero-summary {
    font-size: 14.5px;
    line-height: 1.8;
-   color: #7e7a6e;
+   color: #7a92b8;
    max-width: 620px;
    margin-bottom: 24px;
  }
@@ -328,7 +326,7 @@
  .exp-bullets li {
    font-size: 14px;
    line-height: 1.7;
-   color: #8e8a80;
+   color: #6a88b0;
    padding-left: 16px;
    position: relative;
  }
@@ -407,7 +405,7 @@
  .project-desc {
    font-size: 13.5px;
    line-height: 1.7;
-   color: #7a7668;
+   color: #5a7899;
  }
 
  /* ── EDUCATION ── */
@@ -447,7 +445,7 @@
    display: flex;
    align-items: center;
    gap: 14px;
-   background: var(--surface);
+   background: var(--surface2);
    border: 1px solid var(--border);
    border-radius: 3px;
    padding: 16px 20px;
@@ -521,7 +519,7 @@
 
  /* ── SCROLL TO TOP ── */
  .scroll-top {
-   display: none; /* shown via JS on mobile */
+   display: none;
    position: fixed;
    bottom: 24px;
    right: 24px;
@@ -546,7 +544,7 @@
  .scroll-top svg {
    width: 18px;
    height: 18px;
-   stroke: #0f0d0a;
+   stroke: #0b1120;
    fill: none;
  }
 
@@ -893,7 +891,6 @@
 </footer>
 
 <script>
-  // Headshot fallback
   const img = document.getElementById('headshot-img');
   const placeholder = document.getElementById('headshot-placeholder');
   img.addEventListener('error', () => {
@@ -901,7 +898,6 @@
     placeholder.style.display = 'flex';
   });
 
-  // ── MOBILE MENU ──
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
 
@@ -911,7 +907,6 @@
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
-  // Close menu when a link is tapped
   document.querySelectorAll('.menu-link').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
@@ -920,7 +915,6 @@
     });
   });
 
-  // ── SCROLL TO TOP ──
   const scrollBtn = document.getElementById('scroll-top');
 
   window.addEventListener('scroll', () => {
