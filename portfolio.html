@@ -555,7 +555,6 @@
    bottom: calc(8px + env(safe-area-inset-bottom));
    z-index: 200;
    align-items: center;
-   gap: 8px;
  }
  .dock {
    flex: 1;
@@ -598,11 +597,15 @@
    background: rgba(201,168,76,0.14);
  }
 
+ /* Takes no space until visible, so the menu is full width near the top of the page */
  .to-top {
    display: flex;
    flex-shrink: 0;
-   width: 44px;
+   width: 0;
    height: 44px;
+   margin-left: 0;
+   padding: 0;
+   overflow: hidden;
    align-items: center;
    justify-content: center;
    border: none;
@@ -612,9 +615,11 @@
    box-shadow: 0 6px 24px rgba(0,0,0,0.5);
    opacity: 0;
    pointer-events: none;
-   transition: opacity 0.25s ease;
+   visibility: hidden;
+   transition: width 0.25s ease, margin-left 0.25s ease, opacity 0.25s ease, visibility 0.25s;
  }
- .to-top.visible { opacity: 1; pointer-events: all; }
+ .to-top.visible { width: 44px; margin-left: 8px; opacity: 1; pointer-events: all; visibility: visible; }
+ .to-top svg { flex-shrink: 0; }
  .to-top svg { width: 18px; height: 18px; stroke: #0d1117; fill: none; }
 
  /* ── ANIMATIONS ── */
