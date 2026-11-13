@@ -4,9 +4,19 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Uriel Aguilar Torres</title>
-<link rel="icon" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/favicon.svg">
+  <title>Uriel Aguilar Torres — IT Systems Administrator</title>
+  <meta name="description" content="Connect with Uriel Aguilar Torres, IT Systems Administrator at Beef Northwest Feeders. Email, LinkedIn, full profile, resume and a contact card to save."/>
+  <meta name="theme-color" content="#0d1117"/>
+  <meta property="og:type" content="profile"/>
+  <meta property="og:title" content="Uriel Aguilar Torres — IT Systems Administrator"/>
+  <meta property="og:description" content="IT Systems Administrator in the Portland, OR metro. Endpoint management, ITSM, identity and access. Connect, save my contact card or view my full profile."/>
+  <meta property="og:url" content="https://connect.urielaguilartorres.com/"/>
+  <meta property="og:image" content="https://connect.urielaguilartorres.com/headshot.png"/>
+  <meta name="twitter:card" content="summary"/>
+<link rel="icon" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -15,7 +25,7 @@
       --surface2: #181e28;
       --border: #252d3a;
       --text: #f0f2f5;
-      --muted: #7a8496;
+      --muted: #8d97aa;
       --accent: #c9a84c;
       --accent-dim: rgba(201,168,76,0.12);
       --accent2: #b0975a;
@@ -139,10 +149,18 @@ body::after {
 
 .card-location {
   font-family: 'DM Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   color: var(--muted);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+}
+
+/* Short pitch: shown on mobile, where the side panel is hidden */
+.card-tagline {
+  display: none;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #a3abbb;
 }
 
 .divider {
@@ -206,13 +224,13 @@ body::after {
 }
 .link-label {
   font-family: 'DM Mono', monospace;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .link-value {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text);
 }
 
@@ -249,6 +267,12 @@ body::after {
   transition: opacity 0.2s, transform 0.15s;
 }
 .btn-portfolio:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* Keyboard focus */
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .btn-portfolio svg { width: 14px; height: 14px; }
 
 /* ── RIGHT PANEL (desktop only) ── */
@@ -267,7 +291,7 @@ body::after {
 
 .panel-label {
   font-family: 'DM Mono', monospace;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
@@ -294,9 +318,10 @@ body::after {
 }
 
 .panel-body {
+  text-wrap: pretty;
   font-size: 13px;
   line-height: 1.8;
-  color: #8e96a8;
+  color: #a3abbb;
 }
 
 /* Quick-facts list */
@@ -310,7 +335,7 @@ body::after {
   align-items: flex-start;
   gap: 10px;
   font-size: 13px;
-  color: #8e96a8;
+  color: #a3abbb;
   line-height: 1.5;
 }
 .fact-dot {
@@ -342,6 +367,10 @@ body::after {
 .btn-portfolio { animation: fadeUp 0.5s ease 0.4s both; }
 .side-panel    { animation: fadeUp 0.5s ease 0.25s both; }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
 /* ── TABLET: balanced two columns, tighter spacing ── */
 @media (max-width: 860px) and (min-width: 601px) {
   body { padding: 32px 20px; }
@@ -368,6 +397,7 @@ body::after {
   }
 
   .side-panel { display: none; }
+  .card-tagline { display: block; }
 }
 
   </style>
@@ -390,6 +420,7 @@ body::after {
   <h1 class="card-name">Uriel <em>Aguilar Torres</em></h1>
   <p class="card-title">IT Systems Administrator · Beef Northwest Feeders</p>
   <p class="card-location">Portland, OR Metro &nbsp;·&nbsp; Oregon Tech '27</p>
+  <p class="card-tagline">I run IT systems, endpoint management and identity for multi-site agricultural organizations. Reach out about sysadmin roles, macOS and endpoint management, or ag and FFA work.</p>
 </div>
 
 <div class="divider"></div>
@@ -411,7 +442,7 @@ body::after {
     </svg>
   </a>
 
-  <a href="https://linkedin.com/in/urielagtor" target="_blank" class="card-link">
+  <a href="https://linkedin.com/in/urielagtor" target="_blank" rel="noopener noreferrer" class="card-link">
     <span class="link-icon">
       <svg fill="currentColor" viewBox="0 0 24 24">
         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -421,34 +452,48 @@ body::after {
       <span class="link-label">LinkedIn</span>
       <span class="link-value">linkedin.com/in/urielagtor</span>
     </span>
-    <svg class="link-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg class="link-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M7 17L17 7M8 7h9v9"/>
+    </svg>
+  </a>
+
+  <a href="portfolio.html" class="card-link">
+    <span class="link-icon">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+      </svg>
+    </span>
+    <span class="link-text">
+      <span class="link-label">Full Profile</span>
+      <span class="link-value">Experience, projects &amp; skills</span>
+    </span>
+    <svg class="link-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <polyline points="9 18 15 12 9 6"/>
     </svg>
   </a>
 
-  <a href="/contact.vcf"
-     class="card-link">
+  <a href="AguilarTorres_Uriel_Resume.pdf" target="_blank" rel="noopener" class="card-link">
     <span class="link-icon">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/>
       </svg>
     </span>
     <span class="link-text">
-      <span class="link-label">Contact Card</span>
-      <span class="link-value">Save to contacts</span>
+      <span class="link-label">Resume</span>
+      <span class="link-value">View PDF</span>
     </span>
-    <svg class="link-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="9 18 15 12 9 6"/>
+    <svg class="link-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M7 17L17 7M8 7h9v9"/>
     </svg>
   </a>
 
 </div>
 
-<a href="/portfolio.html" class="btn-portfolio">
-  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+<a href="contact.vcf" class="btn-portfolio">
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
   </svg>
-  View Portfolio
+  Save Contact
 </a>
 
 
@@ -461,32 +506,25 @@ body::after {
 
 <div class="panel-block">
   <div class="panel-label">About</div>
-  <div class="panel-title">IT Systems Administrator</div>
-  <p class="panel-body">IT Systems Administrator with nearly five years of progressive experience, from sole IT resource to enterprise systems administration for multi-site agricultural organizations. I lead ITSM and endpoint management, drove macOS adoption as a supported enterprise platform, and administer identity and access. Currently completing my BS in Information Technology at Oregon Tech.</p>
+  <div class="panel-title">What I do</div>
+  <p class="panel-body">I started in 2021 as the only IT person at a small company and now run systems across multiple sites for an agricultural organization. I lead our ITSM and endpoint management platforms, brought macOS in as a fully supported platform, and administer identity and access. I'm finishing my BS in Information Technology at Oregon Tech.</p>
+  <p class="panel-body" style="margin-top:10px;">Reach out about sysadmin roles, macOS and endpoint management, or ag and FFA work.</p>
 </div>
 
 <div class="panel-block">
-  <div class="panel-label">Quick Facts</div>
+  <div class="panel-label">Highlights</div>
   <div class="fact-list">
-    <div class="fact-item">
-      <div class="fact-dot"></div>
-      <span><strong>Role</strong> — IT Systems Administrator, Beef Northwest Feeders</span>
-    </div>
-    <div class="fact-item">
-      <div class="fact-dot"></div>
-      <span><strong>Degree</strong> — BS Information Technology, Oregon Tech '27</span>
-    </div>
     <div class="fact-item">
       <div class="fact-dot"></div>
       <span><strong>Focus</strong> — Infrastructure, ITSM, endpoint management &amp; security</span>
     </div>
     <div class="fact-item">
       <div class="fact-dot"></div>
-      <span><strong>Location</strong> — Portland, OR Metro</span>
+      <span><strong>Languages</strong> — Bilingual: English &amp; Spanish</span>
     </div>
     <div class="fact-item">
       <div class="fact-dot"></div>
-      <span><strong>Languages</strong> — English &amp; Spanish (bilingual)</span>
+      <span><strong>Recognition</strong> — 1st place, Analyze IT Challenge, AITCC 2026</span>
     </div>
   </div>
 </div>
@@ -496,15 +534,15 @@ body::after {
   <div class="fact-list">
     <div class="fact-item">
       <div class="fact-dot"></div>
-      <span><strong>VP, ASOIT</strong> — Student government, Oregon Tech</span>
+      <span><strong>President &amp; VP, ASOIT</strong> — Oregon Tech student government (2024–2026)</span>
     </div>
     <div class="fact-item">
       <div class="fact-dot"></div>
-      <span><strong>Board Member</strong> — Oregon FFA Foundation ($1.28M raised in 2025)</span>
+      <span><strong>Board Member</strong> — Oregon FFA Foundation, which raised $1.28M in 2025</span>
     </div>
     <div class="fact-item">
       <div class="fact-dot"></div>
-      <span><strong>State Sentinel</strong> — Oregon FFA, represented 15,000+ members</span>
+      <span><strong>State Sentinel</strong> — Oregon FFA state officer for 15,000+ members</span>
     </div>
   </div>
 </div>

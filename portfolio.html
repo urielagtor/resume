@@ -3,10 +3,19 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
- <title>Uriel Aguilar Torres — Systems Administrator</title>
-<link rel="icon" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/favicon.svg">
- <meta name="generator" content="none"/>
+ <title>Uriel Aguilar Torres — IT Systems Administrator Full Profile</title>
+ <meta name="description" content="Full profile of Uriel Aguilar Torres, IT Systems Administrator: experience, projects, skills, certifications, awards and leadership."/>
+ <meta name="theme-color" content="#0d1117"/>
+ <meta property="og:type" content="website"/>
+ <meta property="og:title" content="Uriel Aguilar Torres — IT Systems Administrator Full Profile"/>
+ <meta property="og:description" content="Five years of IT experience across endpoint management, ITSM, identity and access, and infrastructure."/>
+ <meta property="og:url" content="https://connect.urielaguilartorres.com/portfolio.html"/>
+ <meta property="og:image" content="https://connect.urielaguilartorres.com/headshot.png"/>
+ <meta name="twitter:card" content="summary"/>
+<link rel="icon" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+ <link rel="preconnect" href="https://fonts.googleapis.com"/>
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
  <style>
  :root {
@@ -15,10 +24,11 @@
    --surface2: #181e28;
    --border: #252d3a;
    --text: #f0f2f5;
-   --muted: #7a8496;
+   --muted: #8d97aa;
    --accent: #c9a84c;       /* gold */
    --accent2: #b0975a;      /* warm gold-tan — replaces steel blue */
    --rule: #252d3a;
+   --accent-dim: rgba(201,168,76,0.12);
  }
 
  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -77,59 +87,15 @@
    text-decoration: none;
    transition: color 0.2s;
  }
- .nav-links a:hover { color: var(--accent); }
+ .nav-links a:hover,
+ .nav-links a.active { color: var(--accent); }
 
- .nav-hamburger {
-   display: none;
-   flex-direction: column;
-   justify-content: center;
-   gap: 5px;
-   background: none;
-   border: none;
-   cursor: pointer;
-   padding: 4px;
-   z-index: 110;
+ a:focus-visible, button:focus-visible {
+   outline: 2px solid var(--accent);
+   outline-offset: 3px;
  }
- .nav-hamburger span {
-   display: block;
-   width: 22px;
-   height: 2px;
-   background: var(--text);
-   border-radius: 2px;
-   transition: transform 0.3s, opacity 0.3s;
- }
- .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
- .nav-hamburger.open span:nth-child(2) { opacity: 0; }
- .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
- .mobile-menu {
-   display: none;
-   position: fixed;
-   top: 0; left: 0; right: 0; bottom: 0;
-   background: rgba(13,17,23,0.98);
-   z-index: 105;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   gap: 36px;
-   opacity: 0;
-   pointer-events: none;
-   transition: opacity 0.3s ease;
- }
- .mobile-menu.open {
-   opacity: 1;
-   pointer-events: all;
- }
- .mobile-menu a {
-   font-family: 'Cormorant Garamond', serif;
-   font-size: 36px;
-   font-weight: 600;
-   color: var(--text);
-   text-decoration: none;
-   letter-spacing: -0.01em;
-   transition: color 0.2s;
- }
- .mobile-menu a:hover { color: var(--accent); }
+ section[id] { scroll-margin-top: 12px; }
 
  /* ── HERO ── */
  .hero {
@@ -147,7 +113,7 @@
    filter: brightness(0.75) saturate(0.7);
  }
  .hero-card {
-   max-width: 900px;
+   max-width: 1100px;
    margin: 0 auto;
    padding: 0 48px 48px;
    position: relative;
@@ -211,10 +177,11 @@
  .hero-summary {
    font-size: 14.5px;
    line-height: 1.8;
-   color: #8e96a8;
+   color: #a3abbb;
    max-width: 620px;
-   margin-bottom: 24px;
+   margin-bottom: 14px;
  }
+ .hero-summary + .hero-summary { margin-bottom: 24px; }
  .hero-contacts {
    display: flex;
    flex-wrap: wrap;
@@ -302,7 +269,7 @@
    display: inline-block;
    margin-top: 8px;
    font-family: 'DM Mono', monospace;
-   font-size: 9px;
+   font-size: 10px;
    letter-spacing: 0.12em;
    text-transform: uppercase;
    color: var(--muted);
@@ -328,7 +295,7 @@
  .exp-bullets li {
    font-size: 14px;
    line-height: 1.7;
-   color: #8a909c;
+   color: #a0a7b4;
    padding-left: 16px;
    position: relative;
  }
@@ -371,9 +338,7 @@
    border: 1px solid var(--border);
    border-radius: 2px;
    padding: 4px 10px;
-   transition: border-color 0.2s, color 0.2s;
  }
- .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
 
  /* ── PROJECTS ── */
  .projects-grid {
@@ -407,7 +372,7 @@
  .project-desc {
    font-size: 13.5px;
    line-height: 1.7;
-   color: #858b96;
+   color: #a0a7b4;
  }
 
  /* ── EDUCATION ── */
@@ -439,6 +404,11 @@
    font-family: 'DM Mono', monospace;
    font-size: 11px;
    color: var(--muted);
+ }
+ .edu-focus {
+   font-size: 13px;
+   color: #a0a7b4;
+   margin-bottom: 6px;
  }
 
  /* ── CERTS ── */
@@ -494,7 +464,7 @@
    text-transform: uppercase;
    margin-bottom: 12px;
  }
- .leadership-desc { font-size: 13px; line-height: 1.65; color: var(--muted); }
+ .leadership-desc { font-size: 13px; line-height: 1.65; color: #a0a7b4; }
 
  /* ── FOOTER ── */
  footer {
@@ -519,36 +489,130 @@
    letter-spacing: 0.08em;
  }
 
- /* ── SCROLL TO TOP ── */
- .scroll-top {
+ /* ── FLOATING TOC (wide desktop) ── */
+ .toc {
    display: none;
    position: fixed;
-   bottom: 24px;
-   right: 24px;
+   top: 0; /* set by script: level with the first section label, then pinned near the top */
+   /* right edge sits 28px left of the content column (content text starts 502px left of centre) */
+   right: calc(50% + 530px);
+   width: 170px;
+   z-index: 90;
+   opacity: 0;
+   visibility: hidden;
+   transition: opacity 0.3s ease, visibility 0.3s;
+ }
+ .toc.visible { opacity: 1; visibility: visible; }
+ .toc ul { list-style: none; }
+ .toc-title {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   margin-bottom: 12px;
+   font-family: 'DM Mono', monospace;
+   font-size: 10px;
+   letter-spacing: 0.22em;
+   text-transform: uppercase;
+   color: var(--accent);
+ }
+ .toc-title::after { content: ''; flex: 1; height: 1px; background: var(--accent); opacity: 0.4; }
+ .toc a {
+   display: block;
+   padding: 10px 8px 10px 16px;
+   border-left: 3px solid var(--border);
+   font-family: 'DM Mono', monospace;
+   font-size: 12.5px;
+   letter-spacing: 0.1em;
+   text-transform: uppercase;
+   color: #a3abbb;
+   text-decoration: none;
+   transition: color 0.2s, border-color 0.2s, background 0.2s;
+ }
+ .toc a:hover { color: var(--text); border-left-color: var(--accent2); }
+ .toc a.active {
+   color: var(--accent);
+   font-weight: 500;
+   border-left-color: var(--accent);
+   background: linear-gradient(90deg, var(--accent-dim), transparent);
+ }
+ .toc-extra {
+   margin-top: 14px;
+   padding-top: 14px;
+   border-top: 1px solid var(--border);
+ }
+ .toc-extra a { border-left-color: transparent; font-size: 11px; padding-top: 7px; padding-bottom: 7px; color: var(--muted); }
+ .toc-extra a:hover { color: var(--text); border-left-color: var(--border); }
+
+ /* ── MOBILE DOCK (small floating section grid) ── */
+ .dock-wrap {
+   display: none;
+   position: fixed;
+   left: 10px;
+   right: 10px;
+   bottom: calc(8px + env(safe-area-inset-bottom));
    z-index: 200;
-   width: 44px;
-   height: 44px;
-   border-radius: 50%;
-   background: var(--accent);
-   border: none;
-   cursor: pointer;
+   align-items: center;
+   gap: 8px;
+ }
+ .dock {
+   flex: 1;
+   min-width: 0;
+   padding: 4px;
+   background: rgba(19,24,31,0.94);
+   -webkit-backdrop-filter: blur(12px);
+   backdrop-filter: blur(12px);
+   border: 1px solid var(--border);
+   border-radius: 14px;
+   box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+ }
+ .dock-grid {
+   display: grid;
+   grid-template-columns: repeat(var(--cols, 3), 1fr);
+   gap: 3px;
+ }
+ .dock-tile {
+   display: flex;
+   flex-direction: column;
    align-items: center;
    justify-content: center;
-   box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+   gap: 3px;
+   min-height: 40px;
+   padding: 5px 2px;
+   border: 1px solid transparent;
+   border-radius: 10px;
+   color: var(--muted);
+   font-family: 'DM Mono', monospace;
+   font-size: 9px;
+   letter-spacing: 0.06em;
+   text-transform: uppercase;
+   text-decoration: none;
+   transition: border-color 0.2s, background 0.2s, color 0.2s;
+ }
+ .dock-tile svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+ .dock-tile.active {
+   color: var(--accent);
+   border-color: var(--accent);
+   background: rgba(201,168,76,0.14);
+ }
+
+ .to-top {
+   display: flex;
+   flex-shrink: 0;
+   width: 44px;
+   height: 44px;
+   align-items: center;
+   justify-content: center;
+   border: none;
+   border-radius: 50%;
+   background: var(--accent);
+   cursor: pointer;
+   box-shadow: 0 6px 24px rgba(0,0,0,0.5);
    opacity: 0;
    pointer-events: none;
-   transition: opacity 0.3s ease;
+   transition: opacity 0.25s ease;
  }
- .scroll-top.visible {
-   opacity: 1;
-   pointer-events: all;
- }
- .scroll-top svg {
-   width: 18px;
-   height: 18px;
-   stroke: #0d1117;
-   fill: none;
- }
+ .to-top.visible { opacity: 1; pointer-events: all; }
+ .to-top svg { width: 18px; height: 18px; stroke: #0d1117; fill: none; }
 
  /* ── ANIMATIONS ── */
  @keyframes fadeUp {
@@ -563,19 +627,45 @@
  .hero-summary   { animation: fadeUp 0.6s ease 0.4s both; }
  .hero-contacts  { animation: fadeUp 0.6s ease 0.45s both; }
 
+ @media (prefers-reduced-motion: reduce) {
+   html { scroll-behavior: auto; }
+   *, *::before, *::after { animation: none !important; transition: none !important; }
+ }
+
+ /* ── PRINT ── */
+ @media print {
+   body { background: #fff; color: #000; }
+   body::before, nav, .toc, .dock-wrap, .hero-banner { display: none !important; }
+   .hero { padding-top: 0; }
+   .hero-card { padding-top: 24px; }
+   .hero-summary, .exp-bullets li, .project-desc, .leadership-desc, .edu-focus { color: #333; }
+   .hero-name, .exp-role, .project-title, .section-title, .cert-name, .leadership-role, .edu-degree { color: #000; }
+   .exp-bullets li strong { color: #000; }
+   .project-card, .skill-group, .edu-card, .leadership-card, .cert-item { background: #fff; border-color: #ccc; break-inside: avoid; }
+   section { padding: 24px 0; }
+ }
+
+ @media (min-width: 1440px) {
+   nav { display: none; }
+   .hero { padding-top: 0; }
+   .toc { display: block; }
+ }
+
  /* ── RESPONSIVE ── */
  @media (max-width: 900px) {
-   nav { padding: 14px 20px; }
+   nav { padding: 0 20px; height: 60px; }
+   .hero { padding-top: 60px; }
    .nav-links { display: none; }
-   .nav-hamburger { display: flex; }
-   .mobile-menu { display: flex; }
-   .scroll-top { display: flex; }
+   .dock-wrap { display: flex; }
+   body { padding-bottom: 110px; }
 
    .hero-banner { height: 160px; }
    .hero-card { padding: 0 20px 40px; }
    .headshot-circle { width: 130px; height: 130px; margin-top: -65px; }
 
    .container { padding: 0 20px; }
+   section { padding: 56px 0; }
+   .section-title { margin-bottom: 32px; }
    .exp-item { grid-template-columns: 1fr; gap: 10px; }
    .projects-grid,
    .edu-grid { grid-template-columns: 1fr; }
@@ -588,34 +678,38 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-name">Uriel Aguilar Torres</span>
+  <a href="index.html" class="nav-name" style="text-decoration:none;">Uriel Aguilar Torres</a>
   <ul class="nav-links">
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#honors">Honors</a></li>
     <li><a href="#leadership">Leadership</a></li>
+    <li><a href="index.html">Contact</a></li>
   </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<!-- MOBILE MENU DRAWER -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#experience" class="menu-link">Experience</a>
-  <a href="#projects"   class="menu-link">Projects</a>
-  <a href="#skills"     class="menu-link">Skills</a>
-  <a href="#education"  class="menu-link">Education</a>
-  <a href="#leadership" class="menu-link">Leadership</a>
+<!-- MOBILE DOCK: small floating grid, one tile per section -->
+<div class="dock-wrap">
+<div class="dock" id="dock" role="navigation" aria-label="Sections">
+  <div class="dock-grid" id="dock-grid"></div>
+</div>
+<button class="to-top" id="to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 </div>
 
-<!-- SCROLL TO TOP -->
-<button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
-  <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="18 15 12 9 6 15"></polyline>
-  </svg>
-</button>
+<!-- FLOATING TOC (wide desktop, appears below the hero) -->
+<aside class="toc" id="toc" aria-label="Table of contents">
+  <div class="toc-title">Contents</div>
+  <ul id="toc-list"></ul>
+  <ul class="toc-extra">
+    <li><a href="AguilarTorres_Uriel_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+    <li><a href="index.html">Contact</a></li>
+    <li><a href="#top">Back to top</a></li>
+  </ul>
+</aside>
 
 <!-- HERO -->
 <div class="hero" id="top">
@@ -630,17 +724,24 @@
       </div>
     </div>
     <h1 class="hero-name">Uriel <em>Aguilar Torres</em></h1>
-    <p class="hero-title">IT Systems Administrator · Beef Northwest Feeders &nbsp;|&nbsp; BS Information Technology · Oregon Tech '27</p>
-    <p class="hero-location">Portland, OR Metro</p>
+    <p class="hero-title">IT Systems Administrator · Beef Northwest Feeders</p>
+    <p class="hero-location">Portland, OR Metro &nbsp;·&nbsp; BS Information Technology, Oregon Tech (graduating Mar 2027)</p>
     <p class="hero-summary">
-      IT Systems Administrator with nearly five years of progressive experience, advancing from sole IT resource to enterprise systems administration for multi-site agricultural organizations. I lead ITSM and endpoint management platforms, drove macOS adoption as a supported enterprise platform, and administer identity and access. Leader with student government, nonprofit board, and statewide public speaking experience, completing my BS in Information Technology at Oregon Tech.
+      I've worked in IT since 2021, going from the only IT person at a small company to systems administrator for a multi-site agricultural organization. I lead ITSM and endpoint management, brought macOS in as a fully supported platform, and administer identity and access.
+    </p>
+    <p class="hero-summary">
+      Outside the job, I've served as Oregon Tech student body president, sit on the Oregon FFA Foundation board, and have spoken to audiences of thousands as a state FFA officer.
     </p>
     <div class="hero-contacts">
+      <a href="AguilarTorres_Uriel_Resume.pdf" target="_blank" rel="noopener" class="contact-pill">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M8 13h8M8 17h8"/></svg>
+        Resume (PDF)
+      </a>
       <a href="mailto:connect@urielaguilartorres.com" class="contact-pill">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
         connect@urielaguilartorres.com
       </a>
-      <a href="https://linkedin.com/in/urielagtor" target="_blank" class="contact-pill">
+      <a href="https://linkedin.com/in/urielagtor" target="_blank" rel="noopener noreferrer" class="contact-pill">
         <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         linkedin.com/in/urielagtor
       </a>
@@ -658,16 +759,16 @@
       <div class="exp-item">
         <div class="exp-meta">
           <div class="exp-date">Apr 2026 – Present</div>
-          <div class="exp-org">Beef Northwest Feeders<br>Hybrid - North Powder, OR</div>        </div>
+          <div class="exp-org">Beef Northwest Feeders<br>Hybrid, North Powder, OR</div>
+        </div>
         <div class="exp-content">
           <div class="exp-role">IT Systems Administrator</div>
           <ul class="exp-bullets">
-            <li>Administer endpoint management for <strong>Windows and macOS devices plus iOS/iPadOS mobile devices</strong> across multiple locations and states — covering device lifecycle, security, compliance, software deployment, and policy.</li>
-            <li>Lead administration of the organization's <strong>ITSM and RMM platforms</strong>, owning configuration, automation, and continuous improvement; designed the phased, organization-wide RMM deployment, now complete across all managed endpoints.</li>
-            <li>Led the adoption of <strong>macOS as an officially supported enterprise platform</strong>, including automated Apple device enrollment, management standards, deployment workflows, and operational processes.</li>
-            <li>Administer the organization's <strong>identity provider</strong> — authentication policies, role-based access control, license optimization, and SSO integrations with enterprise business systems.</li>
-            <li>Enhanced enterprise status reporting through <strong>centralized alert management, automated incident publishing, and separate end-user and IT-facing status pages</strong>; design and automate executive and operational reporting for IT leadership.</li>
-            <li>Partner with data and software development teams on IdP and system-to-system integrations, defining requirements, validating data mapping, and supporting interoperability.</li>
+            <li>Administer endpoint management for <strong>Windows, macOS and iOS/iPadOS devices</strong> across multiple locations and states, covering device lifecycle, security, compliance, software deployment, and policy.</li>
+            <li>Lead the organization's <strong>ITSM and RMM platforms</strong>, owning configuration, automation, and improvement. Designed the phased RMM rollout, now complete across all managed endpoints.</li>
+            <li>Led adoption of <strong>macOS as an officially supported enterprise platform</strong>, including automated Apple device enrollment, management standards, and deployment workflows.</li>
+            <li>Administer the <strong>identity provider</strong>: authentication policies, role-based access control, license optimization, and SSO integrations with business systems. Partner with data and software teams on system-to-system integrations.</li>
+            <li>Built <strong>centralized alert management, automated incident publishing, and separate end-user and IT-facing status pages</strong>, and automate executive and operational reporting for IT leadership.</li>
           </ul>
         </div>
       </div>
@@ -692,7 +793,9 @@
       <div class="exp-item">
         <div class="exp-meta">
           <div class="exp-date">Dec 2023 – May 2026</div>
-          <div class="exp-org">Material Flow &amp; Conveyor Systems<br>Donald, OR</div>        </div>
+          <div class="exp-org">Material Flow &amp; Conveyor Systems<br>Donald, OR</div>
+          <span class="exp-type">Full-Time</span>
+        </div>
         <div class="exp-content">
           <div class="exp-role">IT Specialist II</div>
           <ul class="exp-bullets">
@@ -731,24 +834,24 @@
     <h2 class="section-title">Work I'm proud of</h2>
     <div class="projects-grid">
       <div class="project-card">
-        <div class="project-tag">Platform Evaluation · BNW</div>
-        <div class="project-title">Helpdesk System Improvements</div>
-        <div class="project-desc">Evaluated 8 ITSM platforms across 20+ criteria, recommended and implemented a full helpdesk solution — including self-service portal, AI chatbot, knowledge base, and automated ticket routing — replacing a fully manual process.</div>
+        <div class="project-tag">Platform Evaluation · Beef Northwest Feeders</div>
+        <div class="project-title">From manual helpdesk to self-service ITSM</div>
+        <div class="project-desc"><strong>Problem:</strong> a fully manual helpdesk. <strong>Approach:</strong> compared 8 platforms on 20+ criteria, then implemented the winner with a self-service portal, AI chatbot, knowledge base and automated routing. <strong>Result:</strong> a live system status page and onboarding/offboarding workflows.</div>
       </div>
       <div class="project-card">
-        <div class="project-tag">Platform Evaluation · BNW</div>
-        <div class="project-title">Device Management &amp; Security Rollout</div>
-        <div class="project-desc">Evaluated 4 device management and security platforms, produced a multi-year cost-benefit analysis across all enterprise endpoints, and presented a formal recommendation. Led the phased company-wide implementation as Systems Administrator, now complete across all managed endpoints.</div>
+        <div class="project-tag">Platform Evaluation · Beef Northwest Feeders</div>
+        <div class="project-title">Device management &amp; security rollout</div>
+        <div class="project-desc"><strong>Approach:</strong> compared 4 vendors on OS patching, zero-touch provisioning, software deployment, scripting, compliance visibility and vulnerability remediation, with a multi-year cost-benefit analysis. <strong>Result:</strong> phased company-wide rollout, now complete across all managed endpoints.</div>
       </div>
       <div class="project-card">
-        <div class="project-tag">Web · MFCS</div>
-        <div class="project-title">E-Commerce Platform Administration</div>
-        <div class="project-desc">Administered a platform serving ~200,000 annual users with 30+ integrated systems. Led a full CMS redesign that drove a 20% increase in traffic and 15% improvement in user engagement.</div>
+        <div class="project-tag">Web · Material Flow &amp; Conveyor Systems</div>
+        <div class="project-title">E-commerce platform redesign</div>
+        <div class="project-desc">Redesigned the CMS for a platform serving ~200,000 annual users and 30+ integrated systems. <strong>Result:</strong> 20% more traffic and 15% higher engagement.</div>
       </div>
       <div class="project-card">
-        <div class="project-tag">Infrastructure · MFCS</div>
-        <div class="project-title">VoIP System Overhaul</div>
-        <div class="project-desc">Planned and executed a full VoIP system migration from scoping to post-implementation review — delivering a 20% increase in communication efficiency and meaningfully reducing system downtime.</div>
+        <div class="project-tag">Infrastructure · Material Flow &amp; Conveyor Systems</div>
+        <div class="project-title">VoIP system overhaul</div>
+        <div class="project-desc">Ran a full VoIP migration from scoping through post-implementation review. <strong>Result:</strong> 20% better communication efficiency and less downtime.</div>
       </div>
     </div>
   </div>
@@ -817,7 +920,8 @@
       <div class="edu-card">
         <div class="edu-degree">BS Information Technology</div>
         <div class="edu-school">Oregon Institute of Technology</div>
-        <div class="edu-dates">Data Infrastructure &amp; Networking Emphasis &nbsp;·&nbsp; Sep 2023 – Mar 2027</div>
+        <div class="edu-focus">Data Infrastructure &amp; Networking emphasis</div>
+        <div class="edu-dates">Sep 2023 – Mar 2027</div>
       </div>
       <div class="edu-card">
         <div class="edu-degree">Certifications</div>
@@ -848,20 +952,27 @@
           </div>
         </div>
       </div>
-      <div class="edu-card" style="grid-column: 1 / -1;">
-        <div class="edu-degree">Honors &amp; Awards</div>
-        <div class="edu-school">America's Innovate IT Collegiate Conference (AITCC) 2026</div>
-        <div class="cert-list" style="margin-top:12px;">
-          <div class="cert-item">
-            <div class="cert-dot"></div>
-            <span class="cert-name">1st Place, Analyze IT Challenge — statistical analysis, predictive modeling, and a written methodology report on a real-world dataset in three hours</span>
-            <span class="cert-year">2026</span>
-          </div>
-          <div class="cert-item">
-            <div class="cert-dot"></div>
-            <span class="cert-name">Top 10 (Honorable Mention), Cyber Sentinel Capture the Flag (Hack The Box) — forensics, OSINT, reverse engineering, web, and cryptography</span>
-            <span class="cert-year">2026</span>
-          </div>
+    </div>
+  </div>
+</section>
+
+<!-- HONORS -->
+<section id="honors" data-menu="Honors">
+  <div class="container">
+    <div class="section-label">Honors &amp; Awards</div>
+    <h2 class="section-title">Competition results</h2>
+    <div class="edu-card">
+      <div class="edu-school">America's Innovate IT Collegiate Conference (AITCC) 2026</div>
+      <div class="cert-list" style="margin-top:12px;">
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <span class="cert-name">1st Place, Analyze IT Challenge — statistical analysis, predictive modeling, and a written methodology report on a real-world dataset in three hours</span>
+          <span class="cert-year">2026</span>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <span class="cert-name">Top 10 (Honorable Mention), Cyber Sentinel Capture the Flag (Hack The Box) — forensics, OSINT, reverse engineering, web, and cryptography</span>
+          <span class="cert-year">2026</span>
         </div>
       </div>
     </div>
@@ -880,24 +991,24 @@
         <div class="leadership-desc">Serve on the board of a 501(c)(3) that raised $1.28M in 2025, supporting 15,800+ Oregon FFA members and 226 agriculture teachers.</div>
       </div>
       <div class="leadership-card">
+        <div class="leadership-role">Workshop Facilitator</div>
+        <div class="leadership-org">National FFA Organization · Oct 2023 – Present</div>
+        <div class="leadership-desc">Contracted for four consecutive years to facilitate 9 workshops over 3 days at each National FFA Convention in Indianapolis, serving as the only Spanish-language workshop facilitator.</div>
+      </div>
+      <div class="leadership-card">
         <div class="leadership-role">Vice President, ASOIT</div>
-        <div class="leadership-org">Oregon Institute of Technology · Jun 2025 – Jun 2026</div>
-        <div class="leadership-desc">Support executive leadership of student government for a 2,000+ student campus — overseeing Cabinet projects and cross-departmental collaboration.</div>
+        <div class="leadership-org">Associated Students of Oregon Tech · Jun 2025 – Jun 2026</div>
+        <div class="leadership-desc">Supported executive leadership of student government for a 2,000+ student campus, overseeing Cabinet projects and cross-departmental collaboration. Chaired the Klamath Falls Elections and Bylaw Review Committee. Helped start re-creating the Oregon Student Association, now the Oregon Student Coalition, with student leaders from public universities and community colleges. Helped pass the new university incidental fee policy, established ASOIT's first university-wide incidental fee policy, and created the incidental fee commission charter for ASOIT-KF.</div>
       </div>
       <div class="leadership-card">
         <div class="leadership-role">President, ASOIT</div>
-        <div class="leadership-org">Oregon Institute of Technology · Jun 2024 – Jun 2025</div>
-        <div class="leadership-desc">Served as chief executive of student government — reporting to the Board of Trustees, meeting monthly with the University President, and sitting on six institutional committees including the Tuition Recommendation Committee and Resource Budget Commission.</div>
+        <div class="leadership-org">Associated Students of Oregon Tech · Jun 2024 – Jun 2025</div>
+        <div class="leadership-desc">Served as chief executive of student government — reporting to the Board of Trustees, meeting monthly with the University President, and sitting on six institutional committees including the Tuition Recommendation Committee and Resource Budget Commission. Helped pass 10 university policies, a record for a single academic year; co-launched a statewide student-led Lobby Day with all six public university student body presidents after the Oregon Student Association dissolved; and co-developed a revised Academic Integrity Policy addressing generative AI.</div>
       </div>
       <div class="leadership-card">
         <div class="leadership-role">State Sentinel</div>
         <div class="leadership-org">Oregon FFA · Mar 2022 – Mar 2023</div>
         <div class="leadership-desc">Elected state officer representing 15,000+ Oregon FFA members. Delivered keynote to 3,000+ attendees at the 95th Oregon FFA State Convention. Facilitated workshops across ~50 classrooms and 11 District Leadership Camps statewide.</div>
-      </div>
-      <div class="leadership-card">
-        <div class="leadership-role">Workshop Facilitator</div>
-        <div class="leadership-org">National FFA Organization · Oct 2023 – Present</div>
-        <div class="leadership-desc">Contracted for four consecutive years to facilitate 9 workshops over 3 days at each National FFA Convention in Indianapolis, serving as the only Spanish-language workshop facilitator.</div>
       </div>
     </div>
   </div>
@@ -906,7 +1017,7 @@
 <!-- FOOTER -->
 <footer>
   <span class="footer-name">Uriel Aguilar Torres</span>
-  <span class="footer-note">connect@urielaguilartorres.com &nbsp;·&nbsp; Portland, OR &nbsp;·&nbsp; Oregon Tech '27</span>
+  <span class="footer-note"><a href="mailto:connect@urielaguilartorres.com" style="color:inherit;text-decoration:none;">connect@urielaguilartorres.com</a> &nbsp;·&nbsp; Portland, OR &nbsp;·&nbsp; Oregon Tech '27</span>
 </footer>
 
 <script>
@@ -917,36 +1028,96 @@
     placeholder.style.display = 'flex';
   });
 
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const ICONS = {
+    experience: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>',
+    projects:   '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+    skills:     '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>',
+    education:  '<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>',
+    honors:     '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>',
+    leadership: '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>'
+  };
 
-  hamburger.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  // Build the grid from the page's sections, so it adapts if sections are added or removed
+  const grid = document.getElementById('dock-grid');
+  const sections = [...document.querySelectorAll('section[id]')];
+  const count = sections.length;
+  const cols = count <= 2 ? Math.max(count, 1) : count <= 4 ? 2 : 3;
+  grid.style.setProperty('--cols', cols);
+  sections.forEach((sec, i) => {
+    const name = sec.dataset.menu || sec.querySelector('.section-label').textContent.trim();
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.className = 'dock-tile';
+    a.title = name;
+    a.setAttribute('aria-label', name);
+    a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[sec.id] || '<circle cx="12" cy="12" r="4"/>') + '</svg><span>' + name + '</span>';
+    // let the last tile fill the row if the count doesn't divide evenly
+    if (i === count - 1 && count % cols) a.style.gridColumn = 'span ' + (cols - (count % cols) + 1);
+    grid.appendChild(a);
   });
+  const tiles = grid.querySelectorAll('.dock-tile');
 
-  document.querySelectorAll('.menu-link').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      hamburger.classList.remove('open');
-      document.body.style.overflow = '';
+  // Floating TOC, built from the same sections
+  const tocList = document.getElementById('toc-list');
+  sections.forEach(sec => {
+    const name = sec.dataset.menu || sec.querySelector('.section-label').textContent.trim();
+    const li = document.createElement('li');
+    li.innerHTML = '<a href="#' + sec.id + '">' + name + '</a>';
+    tocList.appendChild(li);
+  });
+  const tocLinks = tocList.querySelectorAll('a');
+  const toc = document.getElementById('toc');
+  const hero = document.getElementById('top');
+
+  // Highlight the section in view (desktop nav + dock)
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  function setActive(id) {
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    tiles.forEach(a => {
+      const on = a.getAttribute('href') === '#' + id;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
-  });
-
-  const scrollBtn = document.getElementById('scroll-top');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-      scrollBtn.classList.add('visible');
-    } else {
-      scrollBtn.classList.remove('visible');
+  }
+  // Current section = the last one whose top has passed 40% of the way down the viewport
+  let lastActive = null;
+  function updateActive() {
+    let current = '';
+    sections.forEach(sec => {
+      if (sec.getBoundingClientRect().top <= window.innerHeight * 0.4) current = sec.id;
+    });
+    // at the very bottom of the page, the last section counts even if it is short
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+      current = sections[sections.length - 1].id;
     }
-  });
+    if (current !== lastActive) {
+      lastActive = current;
+      setActive(current);
+    }
+  }
 
-  scrollBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  // Clear the highlight at the top, and show the back-to-top button once scrolled
+  const toTop = document.getElementById('to-top');
+  function onScroll() {
+    updateActive();
+    toTop.classList.toggle('visible', window.scrollY > 300);
+    positionToc();
+  }
+  // TOC starts level with the first section's label, then stays pinned 96px from the top.
+  // If the window is too short to fit it, it stays hidden.
+  const firstLabel = document.querySelector('section[id] .section-label');
+  function positionToc() {
+    const h = toc.offsetHeight;
+    const vh = window.innerHeight;
+    const top = Math.max(firstLabel.getBoundingClientRect().top, 96);
+    toc.style.top = top + 'px';
+    toc.classList.toggle('visible', top + h <= vh - 16);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
 
 </body>
