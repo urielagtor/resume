@@ -73,6 +73,7 @@ body::after {
   z-index: 1;
   width: 100%;
   max-width: 960px;
+  margin: auto; /* centres the layout vertically when the screen is taller than the content */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px;
@@ -92,11 +93,21 @@ body::after {
   position: relative;
   z-index: 0;
   width: 100%;
-  height: 130px;
-  object-fit: cover;
-  object-position: center 60%;
+  height: auto;
+  aspect-ratio: 4 / 1; /* show the whole image, including the logo, at every width */
   display: block;
-  filter: brightness(0.65) saturate(0.6);
+}
+
+.card-banner-wrap { position: relative; }
+.card-logo {
+  position: absolute;
+  z-index: 1;
+  top: 9%;
+  right: 3%;
+  width: clamp(52px, 13%, 84px);
+  height: auto;
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.4));
+  pointer-events: none;
 }
 
 .banner-rule {
@@ -375,6 +386,12 @@ a:focus-visible {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
+/* ── LARGE SCREENS: scale the whole layout up, but only as far as the window height allows ── */
+@media (min-width: 1600px) and (min-height: 900px)  { .page { zoom: 1.15; } }
+@media (min-width: 2000px) and (min-height: 1020px) { .page { zoom: 1.3; } }
+@media (min-width: 2500px) and (min-height: 1250px) { .page { zoom: 1.6; } }
+@media (min-width: 3000px) and (min-height: 1550px) { .page { zoom: 2; } }
+
 /* ── TABLET: balanced two columns, tighter spacing ── */
 @media (max-width: 860px) and (min-width: 601px) {
   body { padding: 32px 20px; }
@@ -382,7 +399,6 @@ a:focus-visible {
   .page { gap: 20px; }
 
   .card-name { font-size: 22px; }
-  .card-banner { height: 110px; }
   .headshot-wrap { width: 82px; height: 82px; margin-top: -41px; }
 
   .panel-block { padding: 20px 22px; }
@@ -414,7 +430,10 @@ a:focus-visible {
 
   <div class="card">
 
-<img class="card-banner" src="banner.jpg" alt=""/>
+<div class="card-banner-wrap">
+  <img class="card-banner" src="banner.jpg" alt="Cattle on a feedlot at sunset" width="2800" height="700"/>
+  <img class="card-logo" src="bnw-logo.png" alt="Beef Northwest Feeders" width="480" height="488"/>
+</div>
 <div class="banner-rule"></div>
 
 <div class="card-identity">
