@@ -590,6 +590,7 @@
    text-decoration: none;
    transition: border-color 0.2s, background 0.2s, color 0.2s;
  }
+ .dock-tile span { white-space: nowrap; } /* no text reflow while the menu resizes */
  .dock-tile svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
  .dock-tile.active {
    color: var(--accent);
@@ -616,9 +617,22 @@
    opacity: 0;
    pointer-events: none;
    visibility: hidden;
-   transition: width 0.25s ease, margin-left 0.25s ease, opacity 0.25s ease, visibility 0.25s;
+   transform: scale(0.6);
+   /* hiding: fade and shrink together */
+   transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1), margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+               opacity 0.2s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.4s;
  }
- .to-top.visible { width: 44px; margin-left: 8px; opacity: 1; pointer-events: all; visibility: visible; }
+ .to-top.visible {
+   width: 44px;
+   margin-left: 8px;
+   opacity: 1;
+   transform: none;
+   pointer-events: all;
+   visibility: visible;
+   /* showing: the menu makes room first, then the button fades in */
+   transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1), margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+               opacity 0.25s ease 0.12s, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.05s, visibility 0s;
+ }
  .to-top svg { flex-shrink: 0; }
  .to-top svg { width: 18px; height: 18px; stroke: #0d1117; fill: none; }
 
