@@ -89,6 +89,8 @@ body::after {
 }
 
 .card-banner {
+  position: relative;
+  z-index: 0;
   width: 100%;
   height: 130px;
   object-fit: cover;
@@ -107,6 +109,8 @@ body::after {
 }
 
 .headshot-wrap {
+  position: relative;
+  z-index: 2; /* keep the headshot above the filtered banner image */
   width: 96px;
   height: 96px;
   border-radius: 50%;

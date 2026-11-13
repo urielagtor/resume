@@ -104,6 +104,8 @@
    padding-top: 56px;
  }
  .hero-banner {
+   position: relative;
+   z-index: 0;
    width: 100%;
    height: 220px;
    object-fit: cover;
@@ -119,6 +121,7 @@
    position: relative;
  }
  .headshot-circle {
+   z-index: 2; /* keep the headshot above the filtered banner image */
    width: 172px;
    height: 172px;
    border-radius: 50%;
